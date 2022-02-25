@@ -1,9 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>TheTableOfUn</RootNamespace>
-    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>TableOfUn.Game</RootNamespace>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <OptionStrict>On</OptionStrict>
   </PropertyGroup>
 
@@ -20,11 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Terminal.Gui" Version="1.4.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\TableOfUn.Game\TableOfUn.Game.vbproj" />
+    <ProjectReference Include="..\TableOfUn.Data\TableOfUn.Data.vbproj" />
   </ItemGroup>
 
 </Project>
