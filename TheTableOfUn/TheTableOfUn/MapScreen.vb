@@ -1,4 +1,5 @@
-﻿Imports Terminal.Gui
+﻿Imports TableOfUn.Game
+Imports Terminal.Gui
 
 Module MapScreen
     Const MapViewColumns As Integer = 31
@@ -13,9 +14,24 @@ Module MapScreen
             labels.Add(label)
         End While
     End Sub
+    Private Sub UpdateLabels()
+        Dim character As New PlayerCharacter()
+        Dim left = character.Location.X - MapViewColumns \ 2
+        Dim top = character.Location.Y - MapViewRows \ 2
+        For row = 0 To MapViewRows - 1
+            For column = 0 To MapViewColumns - 1
+                Dim label = labels(row * MapViewColumns + column)
+                Dim x = left + column
+                Dim y = top + row
+                Dim location = TableOfUn.Game.Location.FromXY(x, y)
+                label.Text = "?"
+            Next
+        Next
+    End Sub
     Sub Run()
         Dim window As New Window("Map")
         InitializeLabels(window)
+        UpdateLabels()
         Application.Run(window)
     End Sub
 End Module
