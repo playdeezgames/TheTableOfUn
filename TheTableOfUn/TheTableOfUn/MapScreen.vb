@@ -9,7 +9,7 @@ Module MapScreen
         While labels.Count < MapViewColumns * MapViewRows
             Dim column = labels.Count Mod MapViewColumns
             Dim row = labels.Count \ MapViewColumns
-            Dim label = New Label(column + 1, row + 1, ".")
+            Dim label = New Label(column + 1, row + 1, "?")
             window.Add(label)
             labels.Add(label)
         End While
@@ -24,7 +24,11 @@ Module MapScreen
                 Dim x = left + column
                 Dim y = top + row
                 Dim location = TableOfUn.Game.Location.FromXY(x, y)
-                label.Text = "?"
+                If location.Character IsNot Nothing Then
+                    label.Text = "@"
+                Else
+                    label.Text = "."
+                End If
             Next
         Next
     End Sub

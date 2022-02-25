@@ -15,6 +15,15 @@ Public Class Location
             Return LocationData.ReadY(Id).Value
         End Get
     End Property
+    ReadOnly Property Character As Character
+        Get
+            Dim characterId = CharacterData.ReadForLocation(Id)
+            If characterId IsNot Nothing Then
+                Return New Character(characterId.Value)
+            End If
+            Return Nothing
+        End Get
+    End Property
     Shared Function FromXY(x As Integer, y As Integer) As Location
         Dim locationId = LocationData.ReadForXY(x, y)
         If locationId Is Nothing Then
