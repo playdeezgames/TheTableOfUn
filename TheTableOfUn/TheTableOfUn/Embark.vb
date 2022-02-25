@@ -1,6 +1,9 @@
-﻿Imports Terminal.Gui
+﻿Imports TableOfUn.Game
+Imports Terminal.Gui
 Module Embark
     Sub Run()
-        MessageBox.Query("TODO", "This is where the game begins!", "Ok")
+        Game.Start()
+        MapScreen.Run()
+        Game.Finish()
     End Sub
 End Module
