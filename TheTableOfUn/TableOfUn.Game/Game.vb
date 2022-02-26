@@ -4,7 +4,7 @@ Public Module Game
     Sub Start()
         Store.Reset()
         Dim locationId = LocationData.Create(0, 0)
-        Dim characterId = CharacterData.Create(locationId)
+        Dim characterId = CharacterData.Create(locationId, CharacterType.Player)
         PlayerData.WriteCharacterId(characterId)
     End Sub
     Sub Finish()

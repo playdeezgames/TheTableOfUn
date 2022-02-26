@@ -10,4 +10,9 @@ Public Class Character
             Return New Location(CharacterData.ReadLocation(Id).Value)
         End Get
     End Property
+    ReadOnly Property CharacterType As CharacterType
+        Get
+            Return CType(CharacterData.ReadCharacterType(Id).Value, CharacterType)
+        End Get
+    End Property
 End Class
