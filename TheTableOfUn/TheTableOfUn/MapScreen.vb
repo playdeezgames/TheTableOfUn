@@ -28,6 +28,8 @@ Module MapScreen
                     label.ApplyThingie(location.Character.CharacterType.ToThingie())
                 ElseIf location.Feature IsNot Nothing Then
                     label.ApplyThingie(location.Feature.FeatureType.ToThingie())
+                ElseIf location.Inventory.TopItem IsNot Nothing Then
+                    label.ApplyThingie(location.Inventory.TopItem.ItemType.ToThingie())
                 Else
                     label.ApplyThingie(location.LocationType.ToThingie())
                 End If
