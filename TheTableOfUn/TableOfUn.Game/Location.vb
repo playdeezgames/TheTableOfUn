@@ -41,4 +41,7 @@ Public Class Location
         End If
         Return New Location(locationId.Value)
     End Function
+    Function CanBeEnteredBy(character As Character) As Boolean
+        Return Me.Character Is Nothing AndAlso LocationType.CanBeEnteredBy(character.CharacterType)
+    End Function
 End Class
