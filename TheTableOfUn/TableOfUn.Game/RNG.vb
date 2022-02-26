@@ -10,4 +10,7 @@
         Next
         Throw New NotImplementedException()
     End Function
+    Function FromRange(minimum As Integer, maximum As Integer) As Integer
+        Return random.Next(maximum - minimum + 1) + minimum
+    End Function
 End Module
