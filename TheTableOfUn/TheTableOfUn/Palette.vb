@@ -17,4 +17,12 @@ Module Palette
             .HotNormal = Attribute.Make(Color.Gray, Color.Black),
             .Normal = Attribute.Make(Color.Gray, Color.Black)
         }
+    Public ReadOnly BrownOnBlack As New ColorScheme() With
+        {
+            .Disabled = Attribute.Make(Color.Brown, Color.Black),
+            .Focus = Attribute.Make(Color.Brown, Color.Black),
+            .HotFocus = Attribute.Make(Color.Brown, Color.Black),
+            .HotNormal = Attribute.Make(Color.Brown, Color.Black),
+            .Normal = Attribute.Make(Color.Brown, Color.Black)
+        }
 End Module

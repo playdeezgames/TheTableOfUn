@@ -42,6 +42,15 @@ Public Class Location
         Return New Location(locationId.Value)
     End Function
     Function CanBeEnteredBy(character As Character) As Boolean
-        Return Me.Character Is Nothing AndAlso LocationType.CanBeEnteredBy(character.CharacterType)
+        Return Me.Character Is Nothing AndAlso Feature Is Nothing AndAlso LocationType.CanBeEnteredBy(character.CharacterType)
     End Function
+    ReadOnly Property Feature As Feature
+        Get
+            Dim featureId = FeatureData.ReadForLocation(Id)
+            If featureId IsNot Nothing Then
+                Return New Feature(featureId.Value)
+            End If
+            Return Nothing
+        End Get
+    End Property
 End Class

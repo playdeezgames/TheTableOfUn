@@ -26,6 +26,8 @@ Module MapScreen
                 Dim location = TableOfUn.Game.Location.FromXY(x, y)
                 If location.Character IsNot Nothing Then
                     label.ApplyThingie(location.Character.CharacterType.ToThingie())
+                ElseIf location.Feature IsNot Nothing Then
+                    label.ApplyThingie(location.Feature.FeatureType.ToThingie())
                 Else
                     label.ApplyThingie(location.LocationType.ToThingie())
                 End If
