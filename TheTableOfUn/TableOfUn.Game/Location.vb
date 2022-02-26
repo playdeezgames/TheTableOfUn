@@ -29,11 +29,15 @@ Public Class Location
             Return CType(LocationData.ReadLocationType(Id).Value, LocationType)
         End Get
     End Property
+    Private Shared ReadOnly locationTypeGenerator As New Dictionary(Of LocationType, Integer) From
+        {
+            {LocationType.Floor, 25},
+            {LocationType.Solid, 1}
+        }
     Shared Function FromXY(x As Integer, y As Integer) As Location
         Dim locationId = LocationData.ReadForXY(x, y)
         If locationId Is Nothing Then
-            locationId = LocationData.Create(x, y, LocationType.Floor)
-            'TODO: populate location
+            locationId = LocationData.Create(x, y, RNG.FromGenerator(locationTypeGenerator))
         End If
         Return New Location(locationId.Value)
     End Function
