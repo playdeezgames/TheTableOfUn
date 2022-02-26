@@ -15,9 +15,9 @@ Public Class Character
             Return CType(CharacterData.ReadCharacterType(Id).Value, CharacterType)
         End Get
     End Property
-    Sub Move(deltaX As Integer, deltaY As Integer)
+    Sub Move(direction As Direction)
         Dim start = Location
-        Dim destination = TableOfUn.Game.Location.FromXY(start.X + deltaX, start.Y + deltaY)
+        Dim destination = TableOfUn.Game.Location.FromXY(direction.NextX(start.X), direction.NextY(start.Y))
         If destination.CanBeEnteredBy(Me) Then
             CharacterData.WriteLocation(Id, destination.Id)
         End If

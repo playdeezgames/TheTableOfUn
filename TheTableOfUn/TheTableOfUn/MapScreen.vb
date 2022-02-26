@@ -34,22 +34,22 @@ Module MapScreen
     End Sub
     Private Sub MoveNorth()
         Dim character As New PlayerCharacter()
-        character.Move(0, -1)
+        character.Move(Direction.North)
         UpdateLabels()
     End Sub
     Private Sub MoveSouth()
         Dim character As New PlayerCharacter()
-        character.Move(0, 1)
+        character.Move(Direction.South)
         UpdateLabels()
     End Sub
     Private Sub MoveEast()
         Dim character As New PlayerCharacter()
-        character.Move(1, 0)
+        character.Move(Direction.East)
         UpdateLabels()
     End Sub
     Private Sub MoveWest()
         Dim character As New PlayerCharacter()
-        character.Move(-1, 0)
+        character.Move(Direction.West)
         UpdateLabels()
     End Sub
     Private Sub HandleKey(args As View.KeyEventEventArgs)
