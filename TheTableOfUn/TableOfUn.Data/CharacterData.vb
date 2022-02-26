@@ -23,6 +23,7 @@
         End Using
     End Function
     Function ReadCharacterType(characterId As Long) As Integer?
+        Initialize()
         Using command = CreateCommand("SELECT [CharacterType] FROM [Characters] WHERE [CharacterId]=@CharacterId;", MakeParameter("@CharacterId", characterId))
             Dim result = command.ExecuteScalar
             If result IsNot Nothing Then

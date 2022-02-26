@@ -6,14 +6,16 @@
                 [LocationId] INTEGER PRIMARY KEY,
                 [X] INT NOT NULL,
                 [Y] INT NOT NULL,
+                [LocationType] INT NOT NULL,
                 UNIQUE([X],[Y])
             );")
     End Sub
-    Function Create(x As Integer, y As Integer) As Long
+    Function Create(x As Integer, y As Integer, locationType As Integer) As Long
         Initialize()
-        Using command = CreateCommand("INSERT INTO [Locations]([X],[Y]) VALUES (@X,@Y);")
+        Using command = CreateCommand("INSERT INTO [Locations]([X],[Y],[LocationType]) VALUES (@X,@Y,@LocationType);")
             command.Parameters.AddWithValue("@X", x)
             command.Parameters.AddWithValue("@Y", y)
+            command.Parameters.AddWithValue("@LocationType", locationType)
             command.ExecuteNonQuery()
             Return LastInsertRowId
         End Using
@@ -34,6 +36,18 @@
         Initialize()
         Using command = CreateCommand(
             "SELECT [Y] FROM [Locations] WHERE [LocationId]=@LocationId",
+            MakeParameter("@LocationId", locationId))
+            Dim result = command.ExecuteScalar
+            If result IsNot Nothing Then
+                Return CType(result, Integer)
+            End If
+            Return Nothing
+        End Using
+    End Function
+    Function ReadLocationType(locationId As Long) As Integer?
+        Initialize()
+        Using command = CreateCommand(
+            "SELECT [LocationType] FROM [Locations] WHERE [LocationId]=@LocationId",
             MakeParameter("@LocationId", locationId))
             Dim result = command.ExecuteScalar
             If result IsNot Nothing Then

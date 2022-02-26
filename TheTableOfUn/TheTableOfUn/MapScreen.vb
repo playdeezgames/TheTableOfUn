@@ -14,7 +14,6 @@ Module MapScreen
             labels.Add(label)
         End While
     End Sub
-    Private floorThingie As New Thingie(".", GrayOnBlack)
     Private Sub UpdateLabels()
         Dim character As New PlayerCharacter()
         Dim left = character.Location.X - MapViewColumns \ 2
@@ -28,7 +27,7 @@ Module MapScreen
                 If location.Character IsNot Nothing Then
                     label.ApplyThingie(location.Character.CharacterType.ToThingie())
                 Else
-                    label.ApplyThingie(floorThingie)
+                    label.ApplyThingie(location.LocationType.ToThingie())
                 End If
             Next
         Next

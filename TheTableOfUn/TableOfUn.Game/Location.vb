@@ -24,10 +24,15 @@ Public Class Location
             Return Nothing
         End Get
     End Property
+    ReadOnly Property LocationType As LocationType
+        Get
+            Return CType(LocationData.ReadLocationType(Id).Value, LocationType)
+        End Get
+    End Property
     Shared Function FromXY(x As Integer, y As Integer) As Location
         Dim locationId = LocationData.ReadForXY(x, y)
         If locationId Is Nothing Then
-            locationId = LocationData.Create(x, y)
+            locationId = LocationData.Create(x, y, LocationType.Floor)
             'TODO: populate location
         End If
         Return New Location(locationId.Value)
