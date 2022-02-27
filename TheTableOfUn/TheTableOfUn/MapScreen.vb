@@ -90,6 +90,10 @@ Module MapScreen
                                              GroundInventoryDialog.Run()
                                              UpdateLabels()
                                          End Sub
+        AddHandler inventoryButton.Clicked, Sub()
+                                                InventoryDialog.Run()
+                                                UpdateLabels()
+                                            End Sub
         InitializeLabels(window)
         UpdateLabels()
         window.Add(groundButton)
