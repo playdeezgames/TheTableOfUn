@@ -60,6 +60,8 @@ Module MapScreen
     End Sub
     Private Sub HandleKey(args As View.KeyEventEventArgs)
         Select Case args.KeyEvent.Key
+            Case Key.Enter
+                args.Handled = True
             Case Key.Esc
                 If GameMenu.Run() Then
                     Application.RequestStop()
@@ -79,13 +81,10 @@ Module MapScreen
                 args.Handled = True
         End Select
     End Sub
-    Private Sub HandleGround()
-
-    End Sub
     Sub Run()
         Dim window As New Window("Map")
         AddHandler window.KeyPress, AddressOf HandleKey
-        AddHandler groundButton.Clicked, AddressOf HandleGround
+        AddHandler groundButton.Clicked, AddressOf GroundInventoryDialog.Run
         InitializeLabels(window)
         UpdateLabels()
         window.Add(groundButton)

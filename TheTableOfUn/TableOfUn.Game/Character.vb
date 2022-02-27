@@ -22,4 +22,14 @@ Public Class Character
             CharacterData.WriteLocation(Id, destination.Id)
         End If
     End Sub
+    ReadOnly Property Inventory As Inventory
+        Get
+            Dim inventoryId = CharacterInventoryData.ReadForCharacter(Id)
+            If Not inventoryId.HasValue Then
+                inventoryId = InventoryData.Create()
+                CharacterInventoryData.Write(Id, inventoryId.Value)
+            End If
+            Return New Inventory(inventoryId.Value)
+        End Get
+    End Property
 End Class
