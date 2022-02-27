@@ -7,6 +7,7 @@ Module ItemTypeExtensions
     Private ReadOnly grabtharsThingie As New Thingie("ͳ", RedOnBlack)
     Private ReadOnly pageThingie As New Thingie("p", YellowOnBlack)
     Private ReadOnly incompeteBookThingie As New Thingie("b", BlueOnBlack)
+    Private ReadOnly spellbookThingie As New Thingie("B", BrightBlueOnBlack)
     <Extension()>
     Function ToThingie(itemType As ItemType) As Thingie
         Select Case itemType
@@ -20,6 +21,8 @@ Module ItemTypeExtensions
                 Return incompeteBookThingie
             Case ItemType.MissingPage
                 Return pageThingie
+            Case ItemType.Spellbook
+                Return spellbookThingie
             Case Else
                 Throw New NotImplementedException()
         End Select

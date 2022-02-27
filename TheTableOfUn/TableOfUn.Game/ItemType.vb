@@ -6,6 +6,7 @@ Public Enum ItemType
     GrabtharsHammer
     MissingPage
     IncompleteBook
+    Spellbook
 End Enum
 Public Module ItemTypeExtensions
     <Extension()>
@@ -21,6 +22,8 @@ Public Module ItemTypeExtensions
                 Return "loose page"
             Case ItemType.IncompleteBook
                 Return "book with missing pages"
+            Case ItemType.Spellbook
+                Return "spellbook"
             Case Else
                 Throw New NotImplementedException()
         End Select

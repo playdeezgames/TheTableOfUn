@@ -30,4 +30,22 @@ Public Class Inventory
     Sub Add(item As Item)
         InventoryItemData.Write(item.Id, Id)
     End Sub
+    Function CanCraftRecipe(recipe As Recipe) As Boolean
+        Dim inputs As New Dictionary(Of ItemType, Integer)(recipe.Inputs)
+        For Each item In Items
+            If inputs.ContainsKey(item.ItemType) Then
+                inputs(item.ItemType) -= 1
+            End If
+        Next
+        Return Not inputs.Any(Function(entry)
+                                  Return entry.Value > 0
+                              End Function)
+    End Function
+    ReadOnly Property CanCraft As Boolean
+        Get
+            Return RecipeList.Recipes.Any(Function(recipe)
+                                              Return CanCraftRecipe(recipe)
+                                          End Function)
+        End Get
+    End Property
 End Class
