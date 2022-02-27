@@ -4,6 +4,8 @@ Public Enum ItemType
     Shim
     Candle
     GrabtharsHammer
+    MissingPage
+    IncompleteBook
 End Enum
 Public Module ItemTypeExtensions
     <Extension()>
@@ -15,6 +17,10 @@ Public Module ItemTypeExtensions
                 Return "hammer"
             Case ItemType.Shim
                 Return "shim"
+            Case ItemType.MissingPage
+                Return "loose page"
+            Case ItemType.IncompleteBook
+                Return "book with missing pages"
             Case Else
                 Throw New NotImplementedException()
         End Select
