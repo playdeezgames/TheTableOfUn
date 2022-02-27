@@ -4,7 +4,8 @@ Imports Terminal.Gui
 Module MapScreen
     Const MapViewColumns As Integer = 31
     Const MapViewRows As Integer = 15
-    Private labels As New List(Of Label)
+    Private ReadOnly labels As New List(Of Label)
+    Private ReadOnly groundButton As New Button(1, 16, "Ground")
     Private Sub InitializeLabels(window As Window)
         While labels.Count < MapViewColumns * MapViewRows
             Dim column = labels.Count Mod MapViewColumns
@@ -35,6 +36,7 @@ Module MapScreen
                 End If
             Next
         Next
+        groundButton.Enabled = Not character.Location.Inventory.IsEmpty
     End Sub
     Private Sub MoveNorth()
         Dim character As New PlayerCharacter()
@@ -77,11 +79,16 @@ Module MapScreen
                 args.Handled = True
         End Select
     End Sub
+    Private Sub HandleGround()
+
+    End Sub
     Sub Run()
         Dim window As New Window("Map")
         AddHandler window.KeyPress, AddressOf HandleKey
+        AddHandler groundButton.Clicked, AddressOf HandleGround
         InitializeLabels(window)
         UpdateLabels()
+        window.Add(groundButton)
         Application.Run(window)
     End Sub
 End Module

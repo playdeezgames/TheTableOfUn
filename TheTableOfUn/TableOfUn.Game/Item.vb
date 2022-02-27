@@ -13,4 +13,12 @@ Public Class Item
     Shared Function FromId(itemId As Long) As Item
         Return New Item(itemId)
     End Function
+    Public Overrides Function ToString() As String
+        Dim itemType = ItemData.ReadItemType(Id)
+        If itemType.HasValue Then
+            Return CType(itemType.Value, ItemType).GetName()
+        Else
+            Return "????"
+        End If
+    End Function
 End Class
