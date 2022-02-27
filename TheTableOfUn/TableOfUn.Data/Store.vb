@@ -12,6 +12,10 @@ Public Module Store
             connection = Nothing
         End If
     End Sub
+    Sub Save(filename As String)
+        Dim saveConnection As New SqliteConnection($"Data Source={filename}")
+        connection.BackupDatabase(saveConnection)
+    End Sub
     Function CreateCommand(query As String, ParamArray parameters() As SqliteParameter) As SqliteCommand
         Dim command = connection.CreateCommand()
         command.CommandText = query

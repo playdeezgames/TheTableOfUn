@@ -4,7 +4,7 @@ Imports TableOfUn.Game
 Module ItemTypeExtensions
     Private ReadOnly candleThingie As New Thingie("i", WhiteOnBlack)
     Private ReadOnly shimThingie As New Thingie("-", BrownOnBlack)
-    Private ReadOnly grabtharsThingie As New Thingie("T", RedOnBlack)
+    Private ReadOnly grabtharsThingie As New Thingie("ͳ", RedOnBlack)
     <Extension()>
     Function ToThingie(itemType As ItemType) As Thingie
         Select Case itemType

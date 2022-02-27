@@ -58,6 +58,11 @@ Module MapScreen
     End Sub
     Private Sub HandleKey(args As View.KeyEventEventArgs)
         Select Case args.KeyEvent.Key
+            Case Key.Esc
+                If GameMenu.Run() Then
+                    Application.RequestStop()
+                End If
+                args.Handled = True
             Case Key.CursorUp
                 MoveNorth()
                 args.Handled = True

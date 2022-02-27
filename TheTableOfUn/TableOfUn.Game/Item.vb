@@ -10,4 +10,7 @@ Public Class Item
             Return CType(ItemData.ReadItemType(Id).Value, ItemType)
         End Get
     End Property
+    Shared Function FromId(itemId As Long) As Item
+        Return New Item(itemId)
+    End Function
 End Class

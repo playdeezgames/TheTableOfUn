@@ -16,7 +16,8 @@ Public Module Game
     End Sub
     Private Sub PlaceHammer()
         Dim item As New Item(ItemData.Create(ItemType.GrabtharsHammer))
-        Dim location As New Location(GenerateFloor())
+        'Dim location As New Location(GenerateFloor())
+        Dim location As New Location(LocationData.Create(5, 5, LocationType.Floor))
         location.Inventory.Add(item)
     End Sub
     Private Sub PlaceQuestItems()

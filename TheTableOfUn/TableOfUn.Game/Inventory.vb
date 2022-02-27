@@ -7,16 +7,23 @@ Public Class Inventory
     End Sub
     ReadOnly Property Items As List(Of Item)
         Get
-            Return New List(Of Item)
+            Return InventoryItemData.
+                Read(Id).
+                Select(AddressOf Item.FromId).
+                ToList()
         End Get
     End Property
     ReadOnly Property IsEmpty As Boolean
         Get
-            Return True
+            Return TopItem Is Nothing
         End Get
     End Property
     ReadOnly Property TopItem As Item
         Get
+            Dim itemId = InventoryItemData.ReadTop(Id)
+            If itemId.HasValue Then
+                Return New Item(itemId.Value)
+            End If
             Return Nothing
         End Get
     End Property
