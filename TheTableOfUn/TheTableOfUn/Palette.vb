@@ -33,4 +33,12 @@ Module Palette
             .HotNormal = Attribute.Make(Color.Red, Color.Black),
             .Normal = Attribute.Make(Color.Red, Color.Black)
         }
+    Public ReadOnly YellowOnBlack As New ColorScheme() With
+        {
+            .Disabled = Attribute.Make(Color.BrightYellow, Color.Black),
+            .Focus = Attribute.Make(Color.BrightYellow, Color.Black),
+            .HotFocus = Attribute.Make(Color.BrightYellow, Color.Black),
+            .HotNormal = Attribute.Make(Color.BrightYellow, Color.Black),
+            .Normal = Attribute.Make(Color.BrightYellow, Color.Black)
+        }
 End Module

@@ -6,6 +6,7 @@ Module MapScreen
     Const MapViewRows As Integer = 15
     Private ReadOnly labels As New List(Of Label)
     Private ReadOnly groundButton As New Button(1, 16, "Ground")
+    Private ReadOnly inventoryButton As New Button(12, 16, "Inventory")
     Private Sub InitializeLabels(window As Window)
         While labels.Count < MapViewColumns * MapViewRows
             Dim column = labels.Count Mod MapViewColumns
@@ -37,6 +38,7 @@ Module MapScreen
             Next
         Next
         groundButton.Enabled = Not character.Location.Inventory.IsEmpty
+        inventoryButton.Enabled = Not character.Inventory.IsEmpty
     End Sub
     Private Sub MoveNorth()
         Dim character As New PlayerCharacter()
@@ -84,10 +86,14 @@ Module MapScreen
     Sub Run()
         Dim window As New Window("Map")
         AddHandler window.KeyPress, AddressOf HandleKey
-        AddHandler groundButton.Clicked, AddressOf GroundInventoryDialog.Run
+        AddHandler groundButton.Clicked, Sub()
+                                             GroundInventoryDialog.Run()
+                                             UpdateLabels()
+                                         End Sub
         InitializeLabels(window)
         UpdateLabels()
         window.Add(groundButton)
+        window.Add(inventoryButton)
         Application.Run(window)
     End Sub
 End Module
