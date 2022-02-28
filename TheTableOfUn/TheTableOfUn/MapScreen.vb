@@ -99,12 +99,17 @@ Module MapScreen
         CraftDialog.Run()
         UpdateLabels()
     End Sub
+    Private Sub Interact()
+        InteractDialog.Run()
+        UpdateLabels()
+    End Sub
     Sub Run()
         Dim window As New Window("Map")
         AddHandler window.KeyPress, AddressOf HandleKey
         AddHandler groundButton.Clicked, AddressOf ShowGround
         AddHandler inventoryButton.Clicked, AddressOf ShowInventory
         AddHandler craftButton.Clicked, AddressOf Craft
+        AddHandler interactButton.Clicked, AddressOf Interact
         InitializeLabels(window)
         UpdateLabels()
         window.Add(groundButton, inventoryButton, craftButton, interactButton)

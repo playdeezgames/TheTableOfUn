@@ -1,28 +1,28 @@
-﻿Imports Terminal.Gui
-Imports TableOfUn.Game
+﻿Imports TableOfUn.Game
+Imports Terminal.Gui
 
-Module CraftDialog
-    Private Function HandleRecipe(recipe As Recipe) As Boolean
-        Return New PlayerCharacter().Inventory.Craft(recipe)
+Module InteractDialog
+    Private Function HandleFeature(feature As Feature) As Boolean
+        Return False
     End Function
     Sub Run()
         Dim cancelButton As New Button("Never mind")
         AddHandler cancelButton.Clicked, AddressOf Application.RequestStop
-        Dim dlg As New Dialog("Craftable Recipes:", cancelButton)
+        Dim dlg As New Dialog("Things to Interact With:", cancelButton)
         Dim groundItems As New ListView With {
             .X = Pos.Center,
             .Y = Pos.Center,
             .Width = [Dim].Fill,
             .Height = [Dim].Fill - 2
         }
-        Dim inventory = New PlayerCharacter().Inventory
-        groundItems.SetSource(inventory.CraftableRecipes)
+        Dim character = New PlayerCharacter()
+        groundItems.SetSource(character.Interactables)
         AddHandler groundItems.OpenSelectedItem, Sub(args)
-                                                     If HandleRecipe(CType(args.Value, Recipe)) Then
-                                                         If Not inventory.CanCraft Then
+                                                     If HandleFeature(CType(args.Value, Feature)) Then
+                                                         If character.CanInteract Then
                                                              Application.RequestStop()
                                                          Else
-                                                             groundItems.SetSource(inventory.CraftableRecipes)
+                                                             groundItems.SetSource(character.Interactables)
                                                          End If
                                                      End If
                                                  End Sub

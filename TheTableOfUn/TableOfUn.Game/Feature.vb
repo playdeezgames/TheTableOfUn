@@ -10,4 +10,7 @@ Public Class Feature
             Return CType(FeatureData.ReadFeatureType(Id).Value, FeatureType)
         End Get
     End Property
+    Public Overrides Function ToString() As String
+        Return FeatureType.GetName()
+    End Function
 End Class
