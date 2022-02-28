@@ -8,6 +8,7 @@ Module MapScreen
     Private ReadOnly groundButton As New Button(1, 16, "Ground")
     Private ReadOnly inventoryButton As New Button(12, 16, "Inventory")
     Private ReadOnly craftButton As New Button(26, 16, "Craft")
+    Private ReadOnly interactButton As New Button(1, 17, "Interact")
     Private Sub InitializeLabels(window As Window)
         While labels.Count < MapViewColumns * MapViewRows
             Dim column = labels.Count Mod MapViewColumns
@@ -41,6 +42,7 @@ Module MapScreen
         groundButton.Enabled = Not character.Location.Inventory.IsEmpty
         inventoryButton.Enabled = Not character.Inventory.IsEmpty
         craftButton.Enabled = character.Inventory.CanCraft
+        interactButton.Enabled = character.CanInteract
     End Sub
     Private Sub MoveNorth()
         Dim character As New PlayerCharacter()
@@ -105,7 +107,7 @@ Module MapScreen
         AddHandler craftButton.Clicked, AddressOf Craft
         InitializeLabels(window)
         UpdateLabels()
-        window.Add(groundButton, inventoryButton, craftButton)
+        window.Add(groundButton, inventoryButton, craftButton, interactButton)
         Application.Run(window)
     End Sub
 End Module

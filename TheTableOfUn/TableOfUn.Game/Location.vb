@@ -63,4 +63,7 @@ Public Class Location
             Return New Inventory(inventoryId.Value)
         End Get
     End Property
+    Function GetNeighbor(direction As Direction) As Location
+        Return FromXY(direction.NextX(X), direction.NextY(Y))
+    End Function
 End Class

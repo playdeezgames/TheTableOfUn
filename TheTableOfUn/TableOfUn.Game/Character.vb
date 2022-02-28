@@ -34,4 +34,22 @@ Public Class Character
             Return New Inventory(inventoryId.Value)
         End Get
     End Property
+    ReadOnly Property CanInteract As Boolean
+        Get
+            Return Interactables().Any()
+        End Get
+    End Property
+    ReadOnly Property Interactables As List(Of Feature)
+        Get
+            Dim result As New List(Of Feature) From {
+                Location.GetNeighbor(Direction.East).Feature,
+                Location.GetNeighbor(Direction.North).Feature,
+                Location.GetNeighbor(Direction.South).Feature,
+                Location.GetNeighbor(Direction.West).Feature
+            }
+            Return result.Where(Function(x)
+                                    Return x IsNot Nothing
+                                End Function).ToList()
+        End Get
+    End Property
 End Class

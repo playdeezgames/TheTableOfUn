@@ -11,7 +11,8 @@ Public Module Game
         Return LocationData.Create(x, y, LocationType.Floor)
     End Function
     Private Sub PlaceTable()
-        Dim locationId = GenerateFloor()
+        'Dim locationId = GenerateFloor()
+        Dim locationId = LocationData.Create(10, 10, LocationType.Floor)
         Dim featureId = FeatureData.Create(locationId, FeatureType.TableOfUn)
     End Sub
     Friend Function CreateItem(itemType As ItemType) As Item
