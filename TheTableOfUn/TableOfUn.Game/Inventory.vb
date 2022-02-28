@@ -18,6 +18,11 @@ Public Class Inventory
             Return TopItem Is Nothing
         End Get
     End Property
+    Function HasItemType(itemType As ItemType) As Boolean
+        Return Items.Any(Function(item)
+                             Return item.ItemType = itemType
+                         End Function)
+    End Function
     ReadOnly Property TopItem As Item
         Get
             Dim itemId = InventoryItemData.ReadTop(Id)

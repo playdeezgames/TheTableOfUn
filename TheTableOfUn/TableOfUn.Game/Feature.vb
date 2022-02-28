@@ -1,7 +1,7 @@
 ﻿Imports TableOfUn.Data
 
 Public Class Feature
-    Private ReadOnly Id As Long
+    Public ReadOnly Id As Long
     Sub New(featureId As Long)
         Me.Id = featureId
     End Sub

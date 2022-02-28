@@ -48,7 +48,13 @@ Public Class Location
         Get
             Dim featureId = FeatureData.ReadForLocation(Id)
             If featureId IsNot Nothing Then
-                Return New Feature(featureId.Value)
+                Dim featureType = FeatureData.ReadFeatureType(featureId.Value)
+                Select Case CType(featureType, FeatureType)
+                    Case TableOfUn.Game.FeatureType.TableOfUn
+                        Return New TableOfUnFeature(featureId.Value)
+                    Case Else
+                        Return New Feature(featureId.Value)
+                End Select
             End If
             Return Nothing
         End Get

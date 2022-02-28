@@ -3,6 +3,12 @@ Imports Terminal.Gui
 
 Module InteractDialog
     Private Function HandleFeature(feature As Feature) As Boolean
+        Select Case feature.FeatureType
+            Case FeatureType.TableOfUn
+                Return TableOfUnDialog.Run(CType(feature, TableOfUnFeature))
+            Case Else
+                Throw New NotImplementedException
+        End Select
         Return False
     End Function
     Sub Run()

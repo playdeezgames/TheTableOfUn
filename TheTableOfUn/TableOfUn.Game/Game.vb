@@ -10,10 +10,18 @@ Public Module Game
         Loop While x > -10 AndAlso y > -10 AndAlso x < 10 AndAlso y < 10 AndAlso LocationData.ReadForXY(x, y) Is Nothing
         Return LocationData.Create(x, y, LocationType.Floor)
     End Function
+    Friend Function CreateFeature(locationId As Long, featureType As FeatureType) As Feature
+        Dim featureId = FeatureData.Create(locationId, featureType)
+        Select Case featureType
+            Case FeatureType.TableOfUn
+                TableOfUnFeatureData.Write(featureId, False, 0, False)
+        End Select
+        Return New Feature(featureId)
+    End Function
     Private Sub PlaceTable()
-        'Dim locationId = GenerateFloor()
-        Dim locationId = LocationData.Create(10, 10, LocationType.Floor)
-        Dim featureId = FeatureData.Create(locationId, FeatureType.TableOfUn)
+        Dim locationId = GenerateFloor()
+        'Dim locationId = LocationData.Create(10, 10, LocationType.Floor)
+        CreateFeature(locationId, FeatureType.TableOfUn)
     End Sub
     Friend Function CreateItem(itemType As ItemType) As Item
         Return New Item(ItemData.Create(itemType))
