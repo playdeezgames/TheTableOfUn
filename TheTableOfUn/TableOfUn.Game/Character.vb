@@ -20,6 +20,8 @@ Public Class Character
         Dim destination = TableOfUn.Game.Location.FromXY(direction.NextX(start.X), direction.NextY(start.Y))
         If destination.CanBeEnteredBy(Me) Then
             CharacterData.WriteLocation(Id, destination.Id)
+        Else
+            Game.Play(Sfx.Impassable)
         End If
     End Sub
     ReadOnly Property Inventory As Inventory

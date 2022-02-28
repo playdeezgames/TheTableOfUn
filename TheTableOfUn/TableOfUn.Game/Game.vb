@@ -53,36 +53,6 @@ Public Module Game
         PlacePage()
         PlacePage()
         PlaceBook()
-
-        PlacePage()
-        PlacePage()
-        PlacePage()
-        PlaceBook()
-        PlacePage()
-        PlacePage()
-        PlacePage()
-        PlaceBook()
-        PlacePage()
-        PlacePage()
-        PlacePage()
-        PlaceBook()
-        PlacePage()
-        PlacePage()
-        PlacePage()
-        PlaceBook()
-        PlacePage()
-        PlacePage()
-        PlacePage()
-        PlaceBook()
-        PlacePage()
-        PlacePage()
-        PlacePage()
-        PlaceBook()
-        PlacePage()
-        PlacePage()
-        PlacePage()
-        PlaceBook()
-
     End Sub
     Sub Start()
         Store.Reset()
@@ -95,5 +65,9 @@ Public Module Game
     End Sub
     Sub Finish()
         Store.ShutDown()
+    End Sub
+    Public Event PlaySfx As Action(Of Sfx)
+    Sub Play(sfx As Sfx)
+        RaiseEvent PlaySfx(sfx)
     End Sub
 End Module
