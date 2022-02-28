@@ -85,17 +85,24 @@ Module MapScreen
                 args.Handled = True
         End Select
     End Sub
+    Private Sub ShowInventory()
+        InventoryDialog.Run()
+        UpdateLabels()
+    End Sub
+    Private Sub ShowGround()
+        GroundInventoryDialog.Run()
+        UpdateLabels()
+    End Sub
+    Private Sub Craft()
+        CraftDialog.Run()
+        UpdateLabels()
+    End Sub
     Sub Run()
         Dim window As New Window("Map")
         AddHandler window.KeyPress, AddressOf HandleKey
-        AddHandler groundButton.Clicked, Sub()
-                                             GroundInventoryDialog.Run()
-                                             UpdateLabels()
-                                         End Sub
-        AddHandler inventoryButton.Clicked, Sub()
-                                                InventoryDialog.Run()
-                                                UpdateLabels()
-                                            End Sub
+        AddHandler groundButton.Clicked, AddressOf ShowGround
+        AddHandler inventoryButton.Clicked, AddressOf ShowInventory
+        AddHandler craftButton.Clicked, AddressOf Craft
         InitializeLabels(window)
         UpdateLabels()
         window.Add(groundButton, inventoryButton, craftButton)

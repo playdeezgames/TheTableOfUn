@@ -42,4 +42,10 @@
             Return result
         End Using
     End Function
+    Sub ClearForItem(itemId As Long)
+        Initialize()
+        Using command = CreateCommand("DELETE FROM [InventoryItems] WHERE [ItemId]=@ItemId;", MakeParameter("@ItemId", itemId))
+            command.ExecuteNonQuery()
+        End Using
+    End Sub
 End Module

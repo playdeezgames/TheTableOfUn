@@ -48,4 +48,36 @@ Public Class Inventory
                                           End Function)
         End Get
     End Property
+    ReadOnly Property Craft(recipe As Recipe) As Boolean
+        Get
+            If CanCraftRecipe(recipe) Then
+                For Each input In recipe.Inputs
+                    Dim consumed =
+                        Items.Where(Function(item)
+                                        Return item.ItemType = input.Key
+                                    End Function).Take(input.Value)
+                    For Each item In consumed
+                        item.Destroy()
+                    Next
+                Next
+                For Each output In recipe.Outputs
+                    Dim count = output.Value
+                    While count > 0
+                        Add(Game.CreateItem(output.Key))
+                        count -= 1
+                    End While
+                Next
+                Return True
+            Else
+                Return False
+            End If
+        End Get
+    End Property
+    ReadOnly Property CraftableRecipes As List(Of Recipe)
+        Get
+            Return RecipeList.Recipes.Where(Function(recipe)
+                                                Return CanCraftRecipe(recipe)
+                                            End Function).ToList()
+        End Get
+    End Property
 End Class

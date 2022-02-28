@@ -21,4 +21,7 @@ Public Class Item
             Return "????"
         End If
     End Function
+    Public Sub Destroy()
+        ItemData.Clear(Id)
+    End Sub
 End Class
