@@ -3,7 +3,7 @@ Imports TableOfUn.Game
 
 Module ItemTypeExtensions
     Private ReadOnly candleThingie As New Thingie("i", YellowOnBlack)
-    Private ReadOnly shimThingie As New Thingie("-", BrownOnBlack)
+    Private ReadOnly shimThingie As New Thingie("_", BrownOnBlack)
     Private ReadOnly grabtharsThingie As New Thingie("ͳ", RedOnBlack)
     Private ReadOnly pageThingie As New Thingie("p", YellowOnBlack)
     Private ReadOnly incompeteBookThingie As New Thingie("b", BlueOnBlack)

@@ -41,4 +41,13 @@
             Return Nothing
         End Using
     End Function
+    Sub WriteShimmed(featureId As Long, isShimmed As Boolean)
+        Initialize()
+        Using command = CreateCommand(
+            "UPDATE [TableOfUnFeatures] SET [IsShimmed]=@IsShimmed WHERE [FeatureId]=@FeatureId;",
+            MakeParameter("@FeatureId", featureId),
+            MakeParameter("@IsShimmed", isShimmed))
+            command.ExecuteNonQuery()
+        End Using
+    End Sub
 End Module

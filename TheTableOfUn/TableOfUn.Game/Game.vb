@@ -19,8 +19,8 @@ Public Module Game
         Return New Feature(featureId)
     End Function
     Private Sub PlaceTable()
-        Dim locationId = GenerateFloor()
-        'Dim locationId = LocationData.Create(10, 10, LocationType.Floor)
+        'Dim locationId = GenerateFloor()
+        Dim locationId = LocationData.Create(10, 10, LocationType.Floor)
         CreateFeature(locationId, FeatureType.TableOfUn)
     End Sub
     Friend Function CreateItem(itemType As ItemType) As Item
@@ -33,7 +33,8 @@ Public Module Game
     End Sub
     Private Sub PlaceShim()
         Dim item = CreateItem(ItemType.Shim)
-        Dim location As New Location(GenerateFloor())
+        Dim location As New Location(LocationData.Create(9, 9, LocationType.Floor))
+        'Dim location As New Location(GenerateFloor())
         location.Inventory.Add(item)
     End Sub
     Private Sub PlaceCandle()

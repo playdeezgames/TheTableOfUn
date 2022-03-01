@@ -23,6 +23,11 @@ Public Class Inventory
                              Return item.ItemType = itemType
                          End Function)
     End Function
+    Function GetItemOfType(itemType As ItemType) As Item
+        Return Items.FirstOrDefault(Function(item)
+                                        Return item.ItemType = itemType
+                                    End Function)
+    End Function
     ReadOnly Property TopItem As Item
         Get
             Dim itemId = InventoryItemData.ReadTop(Id)
