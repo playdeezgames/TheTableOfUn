@@ -3,6 +3,7 @@ Imports System.Runtime.CompilerServices
 Imports TableOfUn.Game
 
 Module CharacterTypeExtensions
+    'ȸʃʘɷѦ҈҉ᴥϠ₷
     Private ReadOnly playerThingie As New Thingie("@", WhiteOnBlack)
     <Extension()>
     Function ToThingie(characterType As CharacterType) As Thingie
