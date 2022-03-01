@@ -92,4 +92,11 @@
             command.ExecuteNonQuery()
         End Using
     End Sub
+    Sub Clear(featureId As Long)
+        Initialize()
+        Using command = CreateCommand("DELETE FROM [TableOfUnFeatures] WHERE [FeatureId]=@FeatureId;", MakeParameter("@FeatureId", featureId))
+            command.ExecuteNonQuery()
+        End Using
+    End Sub
+
 End Module

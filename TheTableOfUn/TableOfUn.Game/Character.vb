@@ -52,4 +52,12 @@ Public Class Character
                                 End Function).ToList()
         End Get
     End Property
+    ReadOnly Property DidWinninate As Boolean
+        Get
+            Return CharacterData.ReadDidWinninate(Id).Value
+        End Get
+    End Property
+    Sub Winninate()
+        CharacterData.WriteDidWinninate(Id, True)
+    End Sub
 End Class

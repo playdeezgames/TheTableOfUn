@@ -3,6 +3,7 @@ Imports Terminal.Gui
 
 Module TableOfUnDialog
     Function Run(tableOfUn As TableOfUnFeature) As Boolean
+        Dim result As Boolean = False
         Dim character As New PlayerCharacter()
         Dim cancelButton As New Button("Never mind")
         Dim shimButton As New Button("Shim")
@@ -41,13 +42,19 @@ Module TableOfUnDialog
                                            tableOfUn.PlaceBook(character)
                                            updateDialog()
                                        End Sub
+        AddHandler ritualButton.Clicked, Sub()
+                                             tableOfUn.Destroy()
+                                             Game.PlacePortal()
+                                             Application.RequestStop()
+                                             result = True
+                                         End Sub
         AddHandler cancelButton.Clicked, AddressOf Application.RequestStop
 
         Dim dlg As New Dialog("The Table of Un", cancelButton, shimButton, candleButton, bookButton, ritualButton)
         dlg.Add(shimLabel, candleLabel, bookLabel)
         updateDialog()
         Application.Run(dlg)
-        Return False
+        Return result
     End Function
     Sub Blah()
     End Sub

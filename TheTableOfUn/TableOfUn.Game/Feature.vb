@@ -7,10 +7,17 @@ Public Class Feature
     End Sub
     ReadOnly Property FeatureType As FeatureType
         Get
-            Return CType(FeatureData.ReadFeatureType(Id).Value, FeatureType)
+            Dim result = FeatureData.ReadFeatureType(Id)
+            If result IsNot Nothing Then
+                Return CType(result.Value, FeatureType)
+            End If
+            Return FeatureType.None
         End Get
     End Property
     Public Overrides Function ToString() As String
         Return FeatureType.GetName()
     End Function
+    Sub Destroy()
+        FeatureData.Clear(Id)
+    End Sub
 End Class

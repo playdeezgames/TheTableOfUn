@@ -18,9 +18,12 @@ Public Module Game
         End Select
         Return New Feature(featureId)
     End Function
+    Public Sub PlacePortal()
+        Dim locationId = LocationData.ReadForXY(0, 0).Value
+        CreateFeature(locationId, FeatureType.Portal)
+    End Sub
     Private Sub PlaceTable()
-        'Dim locationId = GenerateFloor()
-        Dim locationId = LocationData.Create(10, 10, LocationType.Floor)
+        Dim locationId = GenerateFloor()
         CreateFeature(locationId, FeatureType.TableOfUn)
     End Sub
     Friend Function CreateItem(itemType As ItemType) As Item
@@ -33,8 +36,7 @@ Public Module Game
     End Sub
     Private Sub PlaceShim()
         Dim item = CreateItem(ItemType.Shim)
-        Dim location As New Location(LocationData.Create(9, 9, LocationType.Floor))
-        'Dim location As New Location(GenerateFloor())
+        Dim location As New Location(GenerateFloor())
         location.Inventory.Add(item)
     End Sub
     Private Sub PlaceCandle()
@@ -69,16 +71,6 @@ Public Module Game
         Dim locationId = LocationData.Create(0, 0, LocationType.Floor)
         Dim characterId = CharacterData.Create(locationId, CharacterType.Player)
         PlayerData.WriteCharacterId(characterId)
-        'TODO: dont give player anything
-        Dim character As New Character(characterId)
-        character.Inventory.Add(New Item(ItemData.Create(ItemType.Candle)))
-        character.Inventory.Add(New Item(ItemData.Create(ItemType.Candle)))
-        character.Inventory.Add(New Item(ItemData.Create(ItemType.Candle)))
-        character.Inventory.Add(New Item(ItemData.Create(ItemType.Candle)))
-        character.Inventory.Add(New Item(ItemData.Create(ItemType.MissingPage)))
-        character.Inventory.Add(New Item(ItemData.Create(ItemType.MissingPage)))
-        character.Inventory.Add(New Item(ItemData.Create(ItemType.MissingPage)))
-        character.Inventory.Add(New Item(ItemData.Create(ItemType.IncompleteBook)))
         PlaceTable()
         'TODO: spawn enemy portal(s)
         PlaceQuestItems()

@@ -100,7 +100,10 @@ Module MapScreen
         UpdateLabels()
     End Sub
     Private Sub Interact()
-        InteractDialog.Run()
+        If InteractDialog.Run() Then
+            MessageBox.Query("YAY!", "You winninated the game!", "Ok")
+            Application.RequestStop()
+        End If
         UpdateLabels()
     End Sub
     Sub Run()

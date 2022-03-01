@@ -43,4 +43,11 @@
             Return Nothing
         End Using
     End Function
+    Sub Clear(featureId As Long)
+        Initialize()
+        TableOfUnFeatureData.Clear(featureId)
+        Using command = CreateCommand("DELETE FROM [Features] WHERE [FeatureId]=@FeatureId;", MakeParameter("@FeatureId", featureId))
+            command.ExecuteNonQuery()
+        End Using
+    End Sub
 End Module

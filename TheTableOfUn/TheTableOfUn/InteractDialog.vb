@@ -6,12 +6,16 @@ Module InteractDialog
         Select Case feature.FeatureType
             Case FeatureType.TableOfUn
                 Return TableOfUnDialog.Run(CType(feature, TableOfUnFeature))
+            Case FeatureType.Portal
+                Dim character As New PlayerCharacter()
+                character.Winninate()
+                Return True
             Case Else
                 Throw New NotImplementedException
         End Select
         Return False
     End Function
-    Sub Run()
+    Function Run() As Boolean
         Dim cancelButton As New Button("Never mind")
         AddHandler cancelButton.Clicked, AddressOf Application.RequestStop
         Dim dlg As New Dialog("Things to Interact With:", cancelButton)
@@ -25,7 +29,7 @@ Module InteractDialog
         groundItems.SetSource(character.Interactables)
         AddHandler groundItems.OpenSelectedItem, Sub(args)
                                                      If HandleFeature(CType(args.Value, Feature)) Then
-                                                         If character.CanInteract Then
+                                                         If Not character.CanInteract OrElse character.DidWinninate Then
                                                              Application.RequestStop()
                                                          Else
                                                              groundItems.SetSource(character.Interactables)
@@ -34,5 +38,6 @@ Module InteractDialog
                                                  End Sub
         dlg.Add(groundItems)
         Application.Run(dlg)
-    End Sub
+        Return character.DidWinninate
+    End Function
 End Module
