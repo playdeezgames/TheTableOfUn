@@ -1,7 +1,17 @@
 # TheTableOfUn
 
-- critters to fight!
 - rpg stats to fight with!
+	- Attack
+	- AttackDie
+	- Defend
+	- DefendDie
+	- Body
+	- Wounds
+- critters to fight!
+	- saurian swinoids
+	- miners 
+	- minors (sharp teeth)
+	- gorignak
 - other stuff to craft!
 - more sounds!
 - trousers!
