@@ -15,7 +15,11 @@ Public Class Character
     End Property
     ReadOnly Property CharacterType As CharacterType
         Get
-            Return CType(CharacterData.ReadCharacterType(Id).Value, CharacterType)
+            Dim result = CharacterData.ReadCharacterType(Id)
+            If result.HasValue Then
+                Return CType(result.Value, CharacterType)
+            End If
+            Return CharacterType.None
         End Get
     End Property
     Sub Move(direction As Direction)
@@ -81,4 +85,7 @@ Public Class Character
     Sub Winninate()
         CharacterData.WriteDidWinninate(Id, True)
     End Sub
+    Public Overrides Function ToString() As String
+        Return CharacterType.GetName()
+    End Function
 End Class

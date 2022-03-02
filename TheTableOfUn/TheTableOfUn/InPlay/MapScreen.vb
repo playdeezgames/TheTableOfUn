@@ -95,6 +95,10 @@ Module MapScreen
         UpdateLabels()
     End Sub
     Private Sub Attack()
+        If AttackDialog.Run() Then
+            MessageBox.Query("BOO!", "You losinated the game!", "Ok")
+            Application.RequestStop()
+        End If
         UpdateLabels()
     End Sub
     Sub Run()
