@@ -90,10 +90,12 @@ Public Class Character
         Return CharacterType.GetName()
     End Function
     Function RollAttack() As Integer
-        Return 0
+        'TODO: if weapon equipped, use those stats instead
+        Return RNG.FromGenerator(CharacterType.GetAttackGenerator())
     End Function
     Function RollDefend() As Integer
-        Return 0
+        'TODO: if armor equipped, use those stats instead
+        Return RNG.FromGenerator(CharacterType.GetDefendGenerator())
     End Function
     Private Shared Function DetermineDamage(attackRoll As Integer, defendRoll As Integer) As Integer
         If attackRoll > defendRoll Then
