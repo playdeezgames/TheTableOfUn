@@ -1,16 +1,14 @@
 # TheTableOfUn
-
-- rpg stats to fight with!
-	- Attack
-	- Defend
-	- Body
-	- Wounds
+- loot drops
+	- piglizards
+		- tusks
+		- hide
 - critters to fight!
-	- saurian swinoids
 	- miners 
 	- minors (sharp teeth)
 	- gorignak
 - other stuff to craft!
+	- piglizard tusk necklace
 - more sounds!
 - trousers!
 - food to eat
@@ -23,3 +21,4 @@
 - weapons
 - armor
 - shields
+
