@@ -5,10 +5,13 @@ Public Class Character
     Sub New(characterId As Long)
         Id = characterId
     End Sub
-    ReadOnly Property Location As Location
+    Property Location As Location
         Get
             Return New Location(CharacterData.ReadLocation(Id).Value)
         End Get
+        Set(value As Location)
+            CharacterData.WriteLocation(Id, value.Id)
+        End Set
     End Property
     ReadOnly Property CharacterType As CharacterType
         Get
@@ -19,7 +22,7 @@ Public Class Character
         Dim start = Location
         Dim destination = TableOfUn.Game.Location.FromXY(direction.NextX(start.X), direction.NextY(start.Y))
         If destination.CanBeEnteredBy(Me) Then
-            CharacterData.WriteLocation(Id, destination.Id)
+            Location = destination
         Else
             Game.Play(Sfx.Impassable)
         End If

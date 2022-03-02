@@ -11,6 +11,18 @@
                 FOREIGN KEY ([LocationId]) REFERENCES [Locations]([LocationId])
             );")
     End Sub
+    Function All() As List(Of Long)
+        Initialize()
+        Using command = CreateCommand("SELECT [CharacterId] FROM [Characters];")
+            Using reader = command.ExecuteReader
+                Dim result As New List(Of Long)
+                While reader.Read
+                    result.Add(CType(reader("CharacterId"), Long))
+                End While
+                Return result
+            End Using
+        End Using
+    End Function
     Function ReadLocation(characterId As Long) As Long?
         Initialize()
         Using command = CreateCommand(

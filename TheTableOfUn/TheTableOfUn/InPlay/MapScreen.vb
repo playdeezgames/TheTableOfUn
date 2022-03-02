@@ -44,24 +44,10 @@ Module MapScreen
         craftButton.Enabled = character.Inventory.CanCraft
         interactButton.Enabled = character.CanInteract
     End Sub
-    Private Sub MoveNorth()
+    Private Sub Move(direction As Direction)
         Dim character As New PlayerCharacter()
-        character.Move(Direction.North)
-        UpdateLabels()
-    End Sub
-    Private Sub MoveSouth()
-        Dim character As New PlayerCharacter()
-        character.Move(Direction.South)
-        UpdateLabels()
-    End Sub
-    Private Sub MoveEast()
-        Dim character As New PlayerCharacter()
-        character.Move(Direction.East)
-        UpdateLabels()
-    End Sub
-    Private Sub MoveWest()
-        Dim character As New PlayerCharacter()
-        character.Move(Direction.West)
+        character.Move(direction)
+        Game.MoveNonplayers()
         UpdateLabels()
     End Sub
     Private Sub HandleKey(args As View.KeyEventEventArgs)
@@ -74,16 +60,16 @@ Module MapScreen
                 End If
                 args.Handled = True
             Case Key.CursorUp
-                MoveNorth()
+                Move(Direction.North)
                 args.Handled = True
             Case Key.CursorDown
-                MoveSouth()
+                Move(Direction.South)
                 args.Handled = True
             Case Key.CursorRight
-                MoveEast()
+                Move(Direction.East)
                 args.Handled = True
             Case Key.CursorLeft
-                MoveWest()
+                Move(Direction.West)
                 args.Handled = True
         End Select
     End Sub

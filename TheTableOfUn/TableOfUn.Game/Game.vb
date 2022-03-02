@@ -85,4 +85,32 @@ Public Module Game
     Sub Play(sfx As Sfx)
         RaiseEvent PlaySfx(sfx)
     End Sub
+    Sub DoNothing(character As Character)
+        'mission accomplished!
+    End Sub
+    Sub SaurianSwinoidTurn(character As Character)
+        Dim direction = PickDirection()
+        Dim nextLocation = character.Location.GetNeighbor(direction)
+        If nextLocation.CanBeEnteredBy(character) Then
+            character.Location = nextLocation
+        End If
+    End Sub
+    Private nonplayerMovers As New Dictionary(Of CharacterType, Action(Of Character)) From
+        {
+            {CharacterType.None, AddressOf DoNothing},
+            {CharacterType.Player, AddressOf DoNothing},
+            {CharacterType.SaurianSwinoid, AddressOf SaurianSwinoidTurn}
+        }
+    Sub MoveNonplayers()
+        Dim characterIds = CharacterData.All()
+        For Each characterId In characterIds
+            Dim character As New Character(characterId)
+            nonplayerMovers(character.CharacterType).Invoke(character)
+        Next
+    End Sub
+    Private directionGenerator As New Dictionary(Of Direction, Integer) From
+        {{Direction.North, 1}, {Direction.South, 1}, {Direction.East, 1}, {Direction.West, 1}}
+    Private Function PickDirection() As Direction
+        Return RNG.FromGenerator(directionGenerator)
+    End Function
 End Module
