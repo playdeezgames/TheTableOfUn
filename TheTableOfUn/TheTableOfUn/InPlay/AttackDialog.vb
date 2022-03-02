@@ -1,8 +1,16 @@
-﻿Imports TableOfUn.Game
+﻿Imports System.Text
+Imports TableOfUn.Game
 Imports Terminal.Gui
 
 Module AttackDialog
-    Private Function HandleAttack(character As Character) As Boolean
+    Private Function HandleAttack(defender As Character) As Boolean
+        Dim attacker As New PlayerCharacter()
+        Dim stringBuilder As New StringBuilder()
+        attacker.Attack(defender, stringBuilder)
+        If Not defender.IsDead Then
+            defender.Attack(attacker, stringBuilder)
+        End If
+        MessageBox.ErrorQuery("HUZZAH!", stringBuilder.ToString(), "Ok")
         Return False
     End Function
     Function Run() As Boolean

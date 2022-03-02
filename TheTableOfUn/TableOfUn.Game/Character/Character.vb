@@ -1,4 +1,5 @@
-﻿Imports TableOfUn.Data
+﻿Imports System.Text
+Imports TableOfUn.Data
 
 Public Class Character
     ReadOnly Property Id As Long
@@ -88,4 +89,41 @@ Public Class Character
     Public Overrides Function ToString() As String
         Return CharacterType.GetName()
     End Function
+    Function RollAttack() As Integer
+        Return 0
+    End Function
+    Function RollDefend() As Integer
+        Return 0
+    End Function
+    Private Shared Function DetermineDamage(attackRoll As Integer, defendRoll As Integer) As Integer
+        If attackRoll > defendRoll Then
+            Return attackRoll - defendRoll
+        End If
+        Return 0
+    End Function
+    Sub DoDamage(damage As Integer)
+        'TODO: stuff
+    End Sub
+    ReadOnly Property IsDead As Boolean
+        Get
+            Return False
+        End Get
+    End Property
+    Sub Attack(defender As Character, stringBuilder As StringBuilder)
+
+        stringBuilder.AppendLine($"{Me} attacks {defender}!")
+        Dim attackRoll = Me.RollAttack()
+        Dim defendRoll = defender.RollDefend()
+        Dim damage = DetermineDamage(attackRoll, defendRoll)
+        If damage > 0 Then
+            stringBuilder.AppendLine($"{Me} hits!")
+            stringBuilder.AppendLine($"{defender} takes {damage} points of damage!")
+        Else
+            stringBuilder.AppendLine($"{Me} misses!")
+        End If
+        defender.DoDamage(damage)
+        If defender.IsDead Then
+            stringBuilder.AppendLine($"{defender} dies!")
+        End If
+    End Sub
 End Class
