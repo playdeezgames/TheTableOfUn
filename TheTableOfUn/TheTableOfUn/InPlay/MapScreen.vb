@@ -5,10 +5,11 @@ Module MapScreen
     Const MapViewColumns As Integer = 31
     Const MapViewRows As Integer = 15
     Private ReadOnly labels As New List(Of Label)
-    Private ReadOnly groundButton As New Button(1, 16, "Ground")
-    Private ReadOnly inventoryButton As New Button(12, 16, "Inventory")
-    Private ReadOnly craftButton As New Button(26, 16, "Craft")
-    Private ReadOnly interactButton As New Button(1, 17, "Interact")
+    Private ReadOnly groundButton As New Button(1, 16, " Ground  ")
+    Private ReadOnly inventoryButton As New Button(15, 16, "Inventory")
+    Private ReadOnly craftButton As New Button(29, 16, "  Craft  ")
+    Private ReadOnly interactButton As New Button(1, 17, "Interact ")
+    Private ReadOnly attackButton As New Button(15, 17, " Attack  ")
     Private Sub InitializeLabels(window As Window)
         While labels.Count < MapViewColumns * MapViewRows
             Dim column = labels.Count Mod MapViewColumns
@@ -43,6 +44,7 @@ Module MapScreen
         inventoryButton.Enabled = Not character.Inventory.IsEmpty
         craftButton.Enabled = character.Inventory.CanCraft
         interactButton.Enabled = character.CanInteract
+        attackButton.Enabled = character.CanAttack
     End Sub
     Private Sub Move(direction As Direction)
         Dim character As New PlayerCharacter()
@@ -92,6 +94,9 @@ Module MapScreen
         End If
         UpdateLabels()
     End Sub
+    Private Sub Attack()
+        UpdateLabels()
+    End Sub
     Sub Run()
         Dim window As New Window("Map")
         AddHandler window.KeyPress, AddressOf HandleKey
@@ -99,9 +104,10 @@ Module MapScreen
         AddHandler inventoryButton.Clicked, AddressOf ShowInventory
         AddHandler craftButton.Clicked, AddressOf Craft
         AddHandler interactButton.Clicked, AddressOf Interact
+        AddHandler attackButton.Clicked, AddressOf Attack
         InitializeLabels(window)
         UpdateLabels()
-        window.Add(groundButton, inventoryButton, craftButton, interactButton)
+        window.Add(groundButton, inventoryButton, craftButton, interactButton, attackButton)
         Application.Run(window)
     End Sub
 End Module

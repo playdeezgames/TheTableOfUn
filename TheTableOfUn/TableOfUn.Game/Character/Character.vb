@@ -55,6 +55,24 @@ Public Class Character
                                 End Function).ToList()
         End Get
     End Property
+    ReadOnly Property Attackables As List(Of Character)
+        Get
+            Dim result As New List(Of Character) From {
+                Location.GetNeighbor(Direction.East).Character,
+                Location.GetNeighbor(Direction.North).Character,
+                Location.GetNeighbor(Direction.South).Character,
+                Location.GetNeighbor(Direction.West).Character
+            }
+            Return result.Where(Function(x)
+                                    Return x IsNot Nothing
+                                End Function).ToList()
+        End Get
+    End Property
+    ReadOnly Property CanAttack As Boolean
+        Get
+            Return Attackables.Any()
+        End Get
+    End Property
     ReadOnly Property DidWinninate As Boolean
         Get
             Return CharacterData.ReadDidWinninate(Id).Value
