@@ -11,6 +11,10 @@ Module AttackDialog
             defender.Attack(attacker, stringBuilder)
         End If
         MessageBox.ErrorQuery("HUZZAH!", stringBuilder.ToString(), "Ok")
+        If defender.IsDead Then
+            defender.Destroy()
+            Return True
+        End If
         Return False
     End Function
     Function Run() As Boolean

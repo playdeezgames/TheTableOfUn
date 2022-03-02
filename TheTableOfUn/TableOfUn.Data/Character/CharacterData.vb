@@ -8,6 +8,7 @@
                 [LocationId] INT NOT NULL UNIQUE,
                 [CharacterType] INT NOT NULL,
                 [DidWinninate] INT NOT NULL,
+                [Wounds] INT NOT NULL,
                 FOREIGN KEY ([LocationId]) REFERENCES [Locations]([LocationId])
             );")
     End Sub
@@ -69,7 +70,7 @@
     Function Create(locationId As Long, characterType As Integer) As Long
         Initialize()
         Using command = CreateCommand(
-            "INSERT INTO [Characters]([LocationId],[CharacterType],[DidWinninate]) VALUES (@LocationId,@CharacterType,0);",
+            "INSERT INTO [Characters]([LocationId],[CharacterType],[DidWinninate],[Wounds]) VALUES (@LocationId,@CharacterType,0,0);",
             MakeParameter("@LocationId", locationId),
             MakeParameter("@CharacterType", characterType))
             command.ExecuteNonQuery()
@@ -94,6 +95,35 @@
             "UPDATE [Characters] SET [DidWinninate]=@DidWinninate WHERE [CharacterId]=@CharacterId;",
             MakeParameter("@CharacterId", characterId),
             MakeParameter("@DidWinninate", didWinninated))
+            command.ExecuteNonQuery()
+        End Using
+    End Sub
+    Sub WriteWounds(characterId As Long, wounds As Integer)
+        Initialize()
+        Using command = CreateCommand(
+            "UPDATE [Characters] SET [Wounds]=@Wounds WHERE [CharacterId]=@CharacterId;",
+            MakeParameter("@CharacterId", characterId),
+            MakeParameter("@Wounds", wounds))
+            command.ExecuteNonQuery()
+        End Using
+    End Sub
+    Function ReadWounds(characterId As Long) As Integer?
+        Initialize()
+        Using command = CreateCommand("SELECT [Wounds] FROM [Characters] WHERE [CharacterId]=@CharacterId;", MakeParameter("@CharacterId", characterId))
+            Dim result = command.ExecuteScalar
+            If result IsNot Nothing Then
+                Return CType(result, Integer)
+            End If
+            Return Nothing
+        End Using
+    End Function
+    Sub Clear(characterId As Long)
+        Initialize()
+        CharacterInventoryData.ClearForCharacter(characterId)
+        If characterId = PlayerData.ReadCharacterId() Then
+            PlayerData.Clear()
+        End If
+        Using command = CreateCommand("DELETE FROM [Characters] WHERE [CharacterId]=@CharacterId;", MakeParameter("@CharacterId", characterId))
             command.ExecuteNonQuery()
         End Using
     End Sub

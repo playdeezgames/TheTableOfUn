@@ -27,4 +27,10 @@
             command.ExecuteNonQuery()
         End Using
     End Sub
+    Sub Clear()
+        Initialize()
+        Using command = CreateCommand("DELETE FROM [Players];")
+            command.ExecuteNonQuery()
+        End Using
+    End Sub
 End Module

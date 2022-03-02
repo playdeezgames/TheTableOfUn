@@ -104,11 +104,19 @@ Public Class Character
         Return 0
     End Function
     Sub DoDamage(damage As Integer)
-        'TODO: stuff
+        Wounds += damage
     End Sub
+    Property Wounds As Integer
+        Get
+            Return CharacterData.ReadWounds(Id).Value
+        End Get
+        Set(value As Integer)
+            CharacterData.WriteWounds(Id, value)
+        End Set
+    End Property
     ReadOnly Property IsDead As Boolean
         Get
-            Return False
+            Return Wounds > CharacterType.GetBodyPoints()
         End Get
     End Property
     Sub Attack(defender As Character, stringBuilder As StringBuilder)
@@ -127,5 +135,10 @@ Public Class Character
         If defender.IsDead Then
             stringBuilder.AppendLine($"{defender} dies!")
         End If
+    End Sub
+    Sub Destroy()
+        'TODO: drop any items?
+        'TODO: remove from location
+        CharacterData.Clear(Id)
     End Sub
 End Class

@@ -69,4 +69,17 @@ Module CharacterTypeExtensions
     Public Function GetDefendGenerator(characterType As CharacterType) As Dictionary(Of Integer, Integer)
         Return attackGenerators(characterType)
     End Function
+    <Extension()>
+    Public Function GetBodyPoints(characterType As CharacterType) As Integer
+        Select Case characterType
+            Case CharacterType.None
+                Return 0
+            Case CharacterType.Player
+                Return 5
+            Case CharacterType.SaurianSwinoid
+                Return 1
+            Case Else
+                Throw New NotImplementedException()
+        End Select
+    End Function
 End Module

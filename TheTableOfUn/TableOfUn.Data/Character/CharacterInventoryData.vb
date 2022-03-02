@@ -32,4 +32,13 @@
             command.ExecuteNonQuery()
         End Using
     End Sub
+    Sub ClearForCharacter(characterId As Long)
+        Initialize()
+        Using command = CreateCommand(
+            "DELETE FROM [CharacterInventories] WHERE [CharacterId]=@CharacterId;",
+            MakeParameter("@CharacterId", characterId))
+            command.ExecuteNonQuery()
+
+        End Using
+    End Sub
 End Module
