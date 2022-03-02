@@ -2,9 +2,7 @@
 
 - rpg stats to fight with!
 	- Attack
-	- AttackDie
 	- Defend
-	- DefendDie
 	- Body
 	- Wounds
 - critters to fight!

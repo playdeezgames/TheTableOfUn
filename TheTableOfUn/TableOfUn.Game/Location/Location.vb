@@ -37,7 +37,12 @@ Public Class Location
     Shared Function FromXY(x As Integer, y As Integer) As Location
         Dim locationId = LocationData.ReadForXY(x, y)
         If locationId Is Nothing Then
-            locationId = LocationData.Create(x, y, RNG.FromGenerator(locationTypeGenerator))
+            Dim locationType As LocationType = CType(RNG.FromGenerator(locationTypeGenerator), LocationType)
+            locationId = LocationData.Create(x, y, locationType)
+            Dim characterType = locationType.GenerateCharacterType()
+            If characterType IsNot Nothing Then
+                Game.CreateCharacter(locationId.Value, characterType.Value)
+            End If
         End If
         Return New Location(locationId.Value)
     End Function

@@ -66,13 +66,16 @@ Public Module Game
         PlacePage()
         PlaceBook()
     End Sub
+    Friend Function CreateCharacter(locationId As Long, characterType As CharacterType) As Character
+        Dim characterId = CharacterData.Create(locationId, characterType)
+        Return New Character(characterId)
+    End Function
     Sub Start()
         Store.Reset()
         Dim locationId = LocationData.Create(0, 0, LocationType.Floor)
-        Dim characterId = CharacterData.Create(locationId, CharacterType.Player)
-        PlayerData.WriteCharacterId(characterId)
+        Dim character = CreateCharacter(locationId, CharacterType.Player)
+        PlayerData.WriteCharacterId(character.Id)
         PlaceTable()
-        'TODO: spawn enemy portal(s)
         PlaceQuestItems()
     End Sub
     Sub Finish()
