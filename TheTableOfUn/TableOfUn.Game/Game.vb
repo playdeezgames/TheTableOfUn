@@ -85,14 +85,17 @@ Public Module Game
     Sub Play(sfx As Sfx)
         RaiseEvent PlaySfx(sfx)
     End Sub
-    Sub DoNothing(character As Character)
+    Private Sub DoNothing(character As Character)
         'mission accomplished!
     End Sub
-    Sub SaurianSwinoidTurn(character As Character)
-        Dim direction = PickDirection()
-        Dim nextLocation = character.Location.GetNeighbor(direction)
-        If nextLocation.CanBeEnteredBy(character) Then
-            character.Location = nextLocation
+    Private ReadOnly swinoidMoveGenerator As New Dictionary(Of Boolean, Integer) From {{True, 1}, {False, 1}}
+    Private Sub SaurianSwinoidTurn(character As Character)
+        If RNG.FromGenerator(swinoidMoveGenerator) Then
+            Dim direction = PickDirection()
+            Dim nextLocation = character.Location.GetNeighbor(direction)
+            If nextLocation.CanBeEnteredBy(character) Then
+                character.Location = nextLocation
+            End If
         End If
     End Sub
     Private nonplayerMovers As New Dictionary(Of CharacterType, Action(Of Character)) From
