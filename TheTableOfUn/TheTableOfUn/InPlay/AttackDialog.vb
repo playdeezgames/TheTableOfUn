@@ -6,9 +6,21 @@ Module AttackDialog
     Private Sub HandleAttack(defender As Character)
         Dim attacker As New PlayerCharacter()
         Dim stringBuilder As New StringBuilder()
-        attacker.Attack(defender, stringBuilder)
+        Select Case attacker.Attack(defender, stringBuilder)
+            Case AttackResult.Miss
+                Game.Play(Sfx.MissEnemy)
+            Case AttackResult.Hit
+                Game.Play(Sfx.HitEnemy)
+            Case AttackResult.Kill
+                Game.Play(Sfx.KillEnemy)
+        End Select
         If Not defender.IsDead Then
-            defender.Attack(attacker, stringBuilder)
+            Select Case defender.Attack(attacker, stringBuilder)
+                Case AttackResult.Kill
+                    Game.Play(Sfx.KillPlayer)
+                Case AttackResult.Hit
+                    Game.Play(Sfx.HitPlayer)
+            End Select
         End If
         MessageBox.ErrorQuery("HUZZAH!", stringBuilder.ToString(), "Ok")
         If defender.IsDead Then

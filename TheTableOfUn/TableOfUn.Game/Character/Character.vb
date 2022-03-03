@@ -119,8 +119,8 @@ Public Class Character
             Return Wounds >= CharacterType.GetBodyPoints()
         End Get
     End Property
-    Sub Attack(defender As Character, stringBuilder As StringBuilder)
-
+    Function Attack(defender As Character, stringBuilder As StringBuilder) As AttackResult
+        Dim result = AttackResult.Miss
         stringBuilder.AppendLine($"{Me} attacks {defender}!")
         Dim attackRoll = Me.RollAttack()
         Dim defendRoll = defender.RollDefend()
@@ -128,17 +128,30 @@ Public Class Character
         If damage > 0 Then
             stringBuilder.AppendLine($"{Me} hits!")
             stringBuilder.AppendLine($"{defender} takes {damage} points of damage!")
+            result = AttackResult.Hit
         Else
             stringBuilder.AppendLine($"{Me} misses!")
         End If
         defender.DoDamage(damage)
         If defender.IsDead Then
             stringBuilder.AppendLine($"{defender} dies!")
+            result = AttackResult.Kill
         End If
-    End Sub
+        Return result
+    End Function
     Sub Destroy()
         'TODO: drop any items?
         'TODO: remove from location
         CharacterData.Clear(Id)
     End Sub
+    ReadOnly Property MaximumHealth As Integer
+        Get
+            Return CharacterType.GetBodyPoints()
+        End Get
+    End Property
+    ReadOnly Property CurrentHealth As Integer
+        Get
+            Return MaximumHealth - Wounds
+        End Get
+    End Property
 End Class
