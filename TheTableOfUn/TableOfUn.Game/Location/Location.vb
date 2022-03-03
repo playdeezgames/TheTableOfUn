@@ -43,6 +43,12 @@ Public Class Location
             If characterType IsNot Nothing Then
                 Game.CreateCharacter(locationId.Value, characterType.Value)
             End If
+            Dim itemType = locationType.GenerateItemType()
+            If itemType IsNot Nothing Then
+                Dim item = Game.CreateItem(itemType.Value)
+                Dim temp As New Location(locationId.Value)
+                temp.Inventory.Add(item)
+            End If
         End If
         Return New Location(locationId.Value)
     End Function

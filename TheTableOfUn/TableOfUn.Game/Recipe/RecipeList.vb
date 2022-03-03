@@ -10,6 +10,16 @@
                 New Dictionary(Of ItemType, Integer) From
                 {
                     {ItemType.Spellbook, 1}
+                }),
+            New Recipe(
+                New Dictionary(Of ItemType, Integer) From
+                {
+                    {ItemType.Rock, 2}
+                },
+                New Dictionary(Of ItemType, Integer) From
+                {
+                    {ItemType.SharpRock, 1},
+                    {ItemType.Rock, 1}
                 })
         }
 

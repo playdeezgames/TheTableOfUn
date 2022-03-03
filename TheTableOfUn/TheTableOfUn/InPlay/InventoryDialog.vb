@@ -3,7 +3,11 @@ Imports Terminal.Gui
 
 Module InventoryDialog
     Private Function HandleItem(item As Item) As Boolean
-        Select Case MessageBox.Query(item.ItemType.GetName(), "What do you want to do?", "Keep it!", "Drop it!")
+        Dim buttons As New List(Of NStack.ustring) From {"Keep it!", "Drop it!"}
+        If item.CanEquip Then
+            buttons.Add("Equip it!")
+        End If
+        Select Case MessageBox.Query(item.ItemType.GetName(), "What do you want to do?", buttons.ToArray)
             Case 1
                 Dim character As New PlayerCharacter()
                 character.Location.Inventory.Add(item)

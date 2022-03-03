@@ -24,4 +24,9 @@ Public Class Item
     Public Sub Destroy()
         ItemData.Clear(Id)
     End Sub
+    ReadOnly Property CanEquip As Boolean
+        Get
+            Return False
+        End Get
+    End Property
 End Class

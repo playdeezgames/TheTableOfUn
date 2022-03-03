@@ -16,7 +16,7 @@ Module LocationTypeExtensions
                 Throw New NotImplementedException()
         End Select
     End Function
-    Private characterGenerators As New Dictionary(Of LocationType, Dictionary(Of CharacterType, Integer)) From
+    Private ReadOnly characterGenerators As New Dictionary(Of LocationType, Dictionary(Of CharacterType, Integer)) From
         {
             {
                 LocationType.Floor,
@@ -33,6 +33,27 @@ Module LocationTypeExtensions
             Dim characterType = RNG.FromGenerator(characterGenerators(locationType))
             If characterType <> CharacterType.None Then
                 Return characterType
+            End If
+        End If
+        Return Nothing
+    End Function
+    Private ReadOnly itemGenerators As New Dictionary(Of LocationType, Dictionary(Of ItemType, Integer)) From
+        {
+            {
+                LocationType.Floor,
+                New Dictionary(Of ItemType, Integer) From
+                {
+                    {ItemType.None, 10},
+                    {ItemType.Rock, 1}
+                }
+            }
+        }
+    <Extension()>
+    Function GenerateItemType(locationType As LocationType) As ItemType?
+        If itemGenerators.ContainsKey(locationType) Then
+            Dim ItemType = RNG.FromGenerator(itemGenerators(locationType))
+            If ItemType <> ItemType.None Then
+                Return ItemType
             End If
         End If
         Return Nothing
