@@ -116,7 +116,7 @@ Public Class Character
     End Property
     ReadOnly Property IsDead As Boolean
         Get
-            Return Wounds > CharacterType.GetBodyPoints()
+            Return Wounds >= CharacterType.GetBodyPoints()
         End Get
     End Property
     Sub Attack(defender As Character, stringBuilder As StringBuilder)

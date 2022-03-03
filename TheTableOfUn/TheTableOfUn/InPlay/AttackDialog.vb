@@ -3,7 +3,7 @@ Imports TableOfUn.Game
 Imports Terminal.Gui
 
 Module AttackDialog
-    Private Function HandleAttack(defender As Character) As Boolean
+    Private Sub HandleAttack(defender As Character)
         Dim attacker As New PlayerCharacter()
         Dim stringBuilder As New StringBuilder()
         attacker.Attack(defender, stringBuilder)
@@ -13,33 +13,30 @@ Module AttackDialog
         MessageBox.ErrorQuery("HUZZAH!", stringBuilder.ToString(), "Ok")
         If defender.IsDead Then
             defender.Destroy()
-            Return True
         End If
-        Return False
-    End Function
+    End Sub
     Function Run() As Boolean
         Dim cancelButton As New Button("Never mind")
         AddHandler cancelButton.Clicked, AddressOf Application.RequestStop
         Dim dlg As New Dialog("Things to Attack:", cancelButton)
-        Dim groundItems As New ListView With {
+        Dim attackableCharacters As New ListView With {
             .X = Pos.Center,
             .Y = Pos.Center,
             .Width = [Dim].Fill,
             .Height = [Dim].Fill - 2
         }
         Dim character = New PlayerCharacter()
-        groundItems.SetSource(character.Attackables)
-        AddHandler groundItems.OpenSelectedItem, Sub(args)
-                                                     If HandleAttack(CType(args.Value, Character)) Then
-                                                         If Not character.CanAttack Then
-                                                             Application.RequestStop()
-                                                         Else
-                                                             groundItems.SetSource(character.Attackables)
-                                                         End If
-                                                     End If
-                                                 End Sub
-        dlg.Add(groundItems)
+        attackableCharacters.SetSource(character.Attackables)
+        AddHandler attackableCharacters.OpenSelectedItem, Sub(args)
+                                                              HandleAttack(CType(args.Value, Character))
+                                                              If Not character.CanAttack OrElse character.IsDead Then
+                                                                  Application.RequestStop()
+                                                              Else
+                                                                  attackableCharacters.SetSource(character.Attackables)
+                                                              End If
+                                                          End Sub
+        dlg.Add(attackableCharacters)
         Application.Run(dlg)
-        Return character.DidWinninate
+        Return character.IsDead
     End Function
 End Module
