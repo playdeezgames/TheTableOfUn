@@ -26,7 +26,7 @@ Public Class Item
     End Sub
     ReadOnly Property CanEquip As Boolean
         Get
-            Return False
+            Return ItemType.CanEquip
         End Get
     End Property
 End Class
