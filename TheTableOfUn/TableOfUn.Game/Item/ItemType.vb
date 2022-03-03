@@ -38,12 +38,16 @@ Public Module ItemTypeExtensions
         End Select
     End Function
     <Extension()>
-    Function CanEquip(itemType As ItemType) As Boolean
+    Function GetEquipSlot(itemType As ItemType) As EquipSlot?
         Select Case itemType
-            Case ItemType.SharpRock, ItemType.Rock
-                Return True
+            Case ItemType.SharpRock, ItemType.Rock, ItemType.GrabtharsHammer
+                Return EquipSlot.Weapon
             Case Else
-                Return False
+                Return Nothing
         End Select
+    End Function
+    <Extension()>
+    Function CanEquip(itemType As ItemType) As Boolean
+        Return itemType.GetEquipSlot IsNot Nothing
     End Function
 End Module

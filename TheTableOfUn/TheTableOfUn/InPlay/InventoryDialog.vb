@@ -8,6 +8,10 @@ Module InventoryDialog
             buttons.Add("Equip it!")
         End If
         Select Case MessageBox.Query(item.ItemType.GetName(), "What do you want to do?", buttons.ToArray)
+            Case 2
+                Dim character As New PlayerCharacter()
+                item.Equip(character)
+                Return True
             Case 1
                 Dim character As New PlayerCharacter()
                 character.Location.Inventory.Add(item)

@@ -29,4 +29,19 @@ Public Class Item
             Return ItemType.CanEquip
         End Get
     End Property
+    Public Sub Unequip(character As Character)
+        CharacterEquipmentData.ClearForItem(Id)
+        character.Inventory.Add(Me)
+    End Sub
+    Public Sub Equip(character As Character)
+        If CanEquip Then
+            InventoryItemData.ClearForItem(Id)
+            Dim equipSlot = ItemType.GetEquipSlot.Value
+            Dim equippedItem = character.GetEquipment(equipSlot)
+            If equippedItem IsNot Nothing Then
+                equippedItem.Unequip(character)
+            End If
+            CharacterEquipmentData.Write(character.Id, equipSlot, Id)
+        End If
+    End Sub
 End Class

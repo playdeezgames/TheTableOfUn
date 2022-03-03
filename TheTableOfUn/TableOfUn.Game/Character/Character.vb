@@ -32,6 +32,13 @@ Public Class Character
             Game.Play(Sfx.Impassable)
         End If
     End Sub
+    Function GetEquipment(equipSlot As EquipSlot) As Item
+        Dim itemId = CharacterEquipmentData.ReadForCharacter(Id, equipSlot)
+        If itemId IsNot Nothing Then
+            Return New Item(itemId.Value)
+        End If
+        Return Nothing
+    End Function
     ReadOnly Property Inventory As Inventory
         Get
             Dim inventoryId = CharacterInventoryData.ReadForCharacter(Id)
