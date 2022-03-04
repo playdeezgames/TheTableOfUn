@@ -10,6 +10,7 @@ Module MapScreen
     Private ReadOnly craftButton As New Button(29, 16, "  Craft  ")
     Private ReadOnly interactButton As New Button(1, 17, "Interact ")
     Private ReadOnly attackButton As New Button(15, 17, " Attack  ")
+    Private ReadOnly equipmentButton As New Button(29, 17, "Equipment")
     Private ReadOnly healthLabel As New Label(MapViewColumns + 2, 1, "Health: X/X")
     Private Sub InitializeLabels(window As Window)
         While labels.Count < MapViewColumns * MapViewRows
@@ -26,6 +27,7 @@ Module MapScreen
         craftButton.Enabled = character.Inventory.CanCraft
         interactButton.Enabled = character.CanInteract
         attackButton.Enabled = character.CanAttack
+        equipmentButton.Enabled = character.HasEquipment
     End Sub
     Private Sub UpdateMap(character As Character)
         Dim left = character.Location.X - MapViewColumns \ 2
@@ -112,6 +114,10 @@ Module MapScreen
         End If
         UpdateScreen()
     End Sub
+    Private Sub Equipment()
+        EquipmentDialog.Run()
+        UpdateScreen()
+    End Sub
     Sub Run()
         Dim window As New Window("Map")
         AddHandler window.KeyPress, AddressOf HandleKey
@@ -120,6 +126,7 @@ Module MapScreen
         AddHandler craftButton.Clicked, AddressOf Craft
         AddHandler interactButton.Clicked, AddressOf Interact
         AddHandler attackButton.Clicked, AddressOf Attack
+        AddHandler equipmentButton.Clicked, AddressOf Equipment
         InitializeLabels(window)
         UpdateScreen()
         window.Add(
@@ -128,6 +135,7 @@ Module MapScreen
             craftButton,
             interactButton,
             attackButton,
+            equipmentButton,
             healthLabel)
         Application.Run(window)
     End Sub

@@ -30,7 +30,7 @@
             command.ExecuteNonQuery()
         End Using
     End Sub
-    Function ReadForCharacter(characterId As Long, equipSlot As Integer) As Long?
+    Function ReadForEquipSlot(characterId As Long, equipSlot As Integer) As Long?
         Initialize()
         Using command =
             CreateCommand(
@@ -42,6 +42,18 @@
                 Return CType(result, Long)
             End If
             Return Nothing
+        End Using
+    End Function
+    Function ReadForCharacter(characterId As Long) As Dictionary(Of Integer, Long)
+        Initialize()
+        Using command = CreateCommand("SELECT [EquipSlot],[ItemId] FROM [CharacterEquipment] WHERE [CharacterId]=@CharacterId;", MakeParameter("@CharacterId", characterId))
+            Using reader = command.ExecuteReader
+                Dim result As New Dictionary(Of Integer, Long)
+                While reader.Read
+                    result.Add(CInt(reader("EquipSlot")), CLng(reader("ItemId")))
+                End While
+                Return result
+            End Using
         End Using
     End Function
 End Module

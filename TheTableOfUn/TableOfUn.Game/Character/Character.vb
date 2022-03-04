@@ -32,8 +32,18 @@ Public Class Character
             Game.Play(Sfx.Impassable)
         End If
     End Sub
+    ReadOnly Property Equipment As Dictionary(Of EquipSlot, Item)
+        Get
+            Dim result As New Dictionary(Of EquipSlot, Item)
+            Dim equippedItems = CharacterEquipmentData.ReadForCharacter(Id)
+            For Each equippedItem In equippedItems
+                result.Add(CType(equippedItem.Key, EquipSlot), New Item(equippedItem.Value))
+            Next
+            Return result
+        End Get
+    End Property
     Function GetEquipment(equipSlot As EquipSlot) As Item
-        Dim itemId = CharacterEquipmentData.ReadForCharacter(Id, equipSlot)
+        Dim itemId = CharacterEquipmentData.ReadForEquipSlot(Id, equipSlot)
         If itemId IsNot Nothing Then
             Return New Item(itemId.Value)
         End If
@@ -159,6 +169,11 @@ Public Class Character
     ReadOnly Property CurrentHealth As Integer
         Get
             Return MaximumHealth - Wounds
+        End Get
+    End Property
+    ReadOnly Property HasEquipment As Boolean
+        Get
+            Return Equipment.Any()
         End Get
     End Property
 End Class
