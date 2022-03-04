@@ -12,8 +12,11 @@ Class EquipmentDialogItem
     End Function
 End Class
 Module EquipmentDialog
-    Private Sub HandleSlot(slot As EquipSlot)
-        'TODO: the stuff
+    Private Sub HandleSlot(character As Character, dialogItem As EquipmentDialogItem)
+        If MessageBox.Query(dialogItem.EquipSlot.GetName(), "What do you want to do?", "Nothing!", "Unequip it!") = 1 Then
+            dialogItem.Item.Unequip(character)
+            Application.RequestStop()
+        End If
     End Sub
     Private Function GetDialogItems(character As Character) As List(Of EquipmentDialogItem)
         Return character.Equipment.Select(Function(entry)
@@ -33,7 +36,7 @@ Module EquipmentDialog
         Dim character = New PlayerCharacter()
         equipmentSlots.SetSource(GetDialogItems(character))
         AddHandler equipmentSlots.OpenSelectedItem, Sub(args)
-                                                        HandleSlot(CType(args.Value, EquipmentDialogItem).EquipSlot)
+                                                        HandleSlot(character, CType(args.Value, EquipmentDialogItem))
                                                         If Not character.HasEquipment Then
                                                             Application.RequestStop()
                                                         Else
