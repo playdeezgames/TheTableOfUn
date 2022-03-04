@@ -1,24 +1,21 @@
 # TheTableOfUn
-- loot drops
+- loot drops(!)
 	- piglizards
 		- tusks
 		- hide
 - critters to fight!
-	- miners 
 	- minors (sharp teeth)
-	- gorignak
 - other stuff to craft!
 	- piglizard tusk necklace
 - more sounds!
 - trousers!
 - food to eat
-- potions to drink
-- treasure chests
-- keys
-- traps
+	- pig lizard meat
 - the Sons of Warvan
 - intro screen to give some sort of hint? (mebbe)
-- weapons
 - armor
 - shields
+- rudimentary lathe
+- must cook meat?
+	- must make fire
 

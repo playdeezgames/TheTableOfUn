@@ -105,6 +105,9 @@ Public Module Game
         End If
     End Sub
     Private Sub GorignakTurn(character As Character)
+        'make gorignak more aggressive
+        'make gorignak smash through walls
+        'stretch: make gorignak pickup and throw rocks
         If RNG.FromGenerator(swinoidMoveGenerator) Then
             Dim direction = PickDirection()
             Dim nextLocation = character.Location.GetNeighbor(direction)
