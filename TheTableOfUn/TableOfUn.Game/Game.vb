@@ -104,11 +104,23 @@ Public Module Game
             End If
         End If
     End Sub
+    Private Sub GorignakTurn(character As Character)
+        If RNG.FromGenerator(swinoidMoveGenerator) Then
+            Dim direction = PickDirection()
+            Dim nextLocation = character.Location.GetNeighbor(direction)
+            If nextLocation.CanBeEnteredBy(character) Then
+                character.Location = nextLocation
+            ElseIf nextLocation.CanBeAttackedBy(character) Then
+                Game.Attack(character, nextLocation.Character)
+            End If
+        End If
+    End Sub
     Private nonplayerMovers As New Dictionary(Of CharacterType, Action(Of Character)) From
         {
             {CharacterType.None, AddressOf DoNothing},
             {CharacterType.Player, AddressOf DoNothing},
-            {CharacterType.SaurianSwinoid, AddressOf SaurianSwinoidTurn}
+            {CharacterType.SaurianSwinoid, AddressOf SaurianSwinoidTurn},
+            {CharacterType.Gorignak, AddressOf GorignakTurn}
         }
     Sub MoveNonplayers()
         Dim characterIds = CharacterData.All()

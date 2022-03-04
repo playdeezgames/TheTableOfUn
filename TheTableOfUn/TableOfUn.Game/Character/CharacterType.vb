@@ -4,6 +4,7 @@ Public Enum CharacterType As Integer
     None
     Player
     SaurianSwinoid
+    Gorignak
 End Enum
 Module CharacterTypeExtensions
     <Extension()>
@@ -15,6 +16,8 @@ Module CharacterTypeExtensions
                 Return "you"
             Case CharacterType.SaurianSwinoid
                 Return "saurian swinoid"
+            Case CharacterType.Gorignak
+                Return "Gorignak!"
             Case Else
                 Throw New NotImplementedException()
         End Select
@@ -36,6 +39,17 @@ Module CharacterTypeExtensions
                 {
                     {0, 2},
                     {1, 1}
+                }
+            },
+            {
+                CharacterType.Gorignak,
+                New Dictionary(Of Integer, Integer) From
+                {
+                    {4, 1},
+                    {3, 8},
+                    {2, 24},
+                    {1, 32},
+                    {0, 16}
                 }
             }
         }
@@ -63,6 +77,17 @@ Module CharacterTypeExtensions
                     {1, 10},
                     {2, 1}
                 }
+            },
+            {
+                CharacterType.Gorignak,
+                New Dictionary(Of Integer, Integer) From
+                {
+                    {4, 1},
+                    {3, 20},
+                    {2, 150},
+                    {1, 500},
+                    {0, 625}
+                }
             }
         }
     <Extension()>
@@ -78,6 +103,8 @@ Module CharacterTypeExtensions
                 Return 5
             Case CharacterType.SaurianSwinoid
                 Return 1
+            Case CharacterType.Gorignak
+                Return 10
             Case Else
                 Throw New NotImplementedException()
         End Select

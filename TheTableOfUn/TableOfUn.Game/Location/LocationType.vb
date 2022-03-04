@@ -22,8 +22,9 @@ Module LocationTypeExtensions
                 LocationType.Floor,
                 New Dictionary(Of CharacterType, Integer) From
                 {
-                    {CharacterType.None, 100},
-                    {CharacterType.SaurianSwinoid, 1}
+                    {CharacterType.None, 1000},
+                    {CharacterType.SaurianSwinoid, 10},
+                    {CharacterType.Gorignak, 1}
                 }
             }
         }
