@@ -120,4 +120,22 @@ Module CharacterTypeExtensions
                 Return destination = CharacterType.Player
         End Select
     End Function
+    Private lootDrops As New Dictionary(Of CharacterType, Dictionary(Of ItemType, Dictionary(Of Integer, Integer))) From
+        {
+            {CharacterType.None, New Dictionary(Of ItemType, Dictionary(Of Integer, Integer))},
+            {CharacterType.Player, New Dictionary(Of ItemType, Dictionary(Of Integer, Integer))},
+            {
+                CharacterType.SaurianSwinoid,
+                New Dictionary(Of ItemType, Dictionary(Of Integer, Integer))
+            },
+            {
+                CharacterType.Gorignak,
+                New Dictionary(Of ItemType, Dictionary(Of Integer, Integer))
+            }
+        }
+    <Extension()>
+    Public Function GenerateLootDrops(characterType As CharacterType) As Dictionary(Of ItemType, Integer)
+        Dim result As New Dictionary(Of ItemType, Integer)
+        Return result
+    End Function
 End Module
