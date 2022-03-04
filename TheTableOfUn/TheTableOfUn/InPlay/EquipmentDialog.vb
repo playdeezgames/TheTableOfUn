@@ -8,7 +8,7 @@ Class EquipmentDialogItem
         Me.Item = item
     End Sub
     Public Overrides Function ToString() As String
-        Return $"{Me.EquipSlot.GetName()}: {Me.Item}"
+        Return $"{EquipSlot.GetName()}: {Item}"
     End Function
 End Class
 Module EquipmentDialog

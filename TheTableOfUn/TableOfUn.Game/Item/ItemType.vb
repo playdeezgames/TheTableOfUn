@@ -50,4 +50,17 @@ Public Module ItemTypeExtensions
     Function CanEquip(itemType As ItemType) As Boolean
         Return itemType.GetEquipSlot IsNot Nothing
     End Function
+    <Extension()>
+    Function GetAttackGenerator(itemType As ItemType) As Dictionary(Of Integer, Integer)
+        Select Case itemType
+            Case ItemType.Rock
+                Return New Dictionary(Of Integer, Integer) From {{0, 1}, {1, 2}}
+            Case ItemType.SharpRock
+                Return New Dictionary(Of Integer, Integer) From {{0, 1}, {1, 2}, {2, 1}}
+            Case ItemType.GrabtharsHammer
+                Return New Dictionary(Of Integer, Integer) From {{0, 1}, {1, 3}, {2, 3}, {3, 1}}
+            Case Else
+                Return New Dictionary(Of Integer, Integer) From {{0, 1}}
+        End Select
+    End Function
 End Module

@@ -106,9 +106,21 @@ Public Class Character
     Public Overrides Function ToString() As String
         Return CharacterType.GetName()
     End Function
+    Private Function GetAttackGenerator() As Dictionary(Of Integer, Integer)
+        Dim initial As New Dictionary(Of Integer, Integer) From {{0, 1}}
+        For Each equippedItem In Equipment
+            initial = initial.CombineGenerator(equippedItem.Value.GetAttackGenerator())
+        Next
+        If initial.All(Function(entry)
+                           Return entry.Key = 0 And entry.Value = 1
+                       End Function) Then
+            Return CharacterType.GetAttackGenerator()
+        End If
+        Return initial
+    End Function
     Function RollAttack() As Integer
         'TODO: if weapon equipped, use those stats instead
-        Return RNG.FromGenerator(CharacterType.GetAttackGenerator())
+        Return RNG.FromGenerator(GetAttackGenerator)
     End Function
     Function RollDefend() As Integer
         'TODO: if armor equipped, use those stats instead

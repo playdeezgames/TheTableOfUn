@@ -44,4 +44,7 @@ Public Class Item
             CharacterEquipmentData.Write(character.Id, equipSlot, Id)
         End If
     End Sub
+    Public Function GetAttackGenerator() As Dictionary(Of Integer, Integer)
+        Return ItemType.GetAttackGenerator()
+    End Function
 End Class
