@@ -85,6 +85,10 @@ Public Module Game
     Sub Play(sfx As Sfx)
         RaiseEvent PlaySfx(sfx)
     End Sub
+    Public Event HandleAttack As Action(Of Character, Character)
+    Sub Attack(attacker As Character, defender As Character)
+        RaiseEvent HandleAttack(attacker, defender)
+    End Sub
     Private Sub DoNothing(character As Character)
         'mission accomplished!
     End Sub
@@ -95,6 +99,8 @@ Public Module Game
             Dim nextLocation = character.Location.GetNeighbor(direction)
             If nextLocation.CanBeEnteredBy(character) Then
                 character.Location = nextLocation
+            ElseIf nextLocation.CanBeAttackedBy(character) Then
+                Game.Attack(character, nextLocation.Character)
             End If
         End If
     End Sub

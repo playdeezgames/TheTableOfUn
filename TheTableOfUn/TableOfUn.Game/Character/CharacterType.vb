@@ -82,4 +82,15 @@ Module CharacterTypeExtensions
                 Throw New NotImplementedException()
         End Select
     End Function
+    <Extension()>
+    Public Function IsHostileTowards(source As CharacterType, destination As CharacterType) As Boolean
+        Select Case source
+            Case CharacterType.None
+                Return False
+            Case CharacterType.Player
+                Return True
+            Case Else
+                Return destination = CharacterType.Player
+        End Select
+    End Function
 End Module

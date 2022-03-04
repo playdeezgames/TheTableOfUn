@@ -5,6 +5,7 @@ Module Program
     Sub Main(args As String())
         Console.Title = "The Table of Un (aka: Un's Table)"
         AddHandler Game.PlaySfx, AddressOf SfxHandler.PlaySfx
+        AddHandler Game.HandleAttack, AddressOf AttackDialog.HandleAttack
         Application.Init()
         SplashScreen.Run()
         MainMenu.Run()

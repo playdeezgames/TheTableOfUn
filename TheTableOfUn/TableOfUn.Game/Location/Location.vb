@@ -55,6 +55,9 @@ Public Class Location
     Function CanBeEnteredBy(character As Character) As Boolean
         Return Me.Character Is Nothing AndAlso Feature Is Nothing AndAlso LocationType.CanBeEnteredBy(character.CharacterType)
     End Function
+    Function CanBeAttackedBy(character As Character) As Boolean
+        Return Me.Character IsNot Nothing AndAlso character.CharacterType.IsHostileTowards(Me.Character.CharacterType)
+    End Function
     ReadOnly Property Feature As Feature
         Get
             Dim featureId = FeatureData.ReadForLocation(Id)

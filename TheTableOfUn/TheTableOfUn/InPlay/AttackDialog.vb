@@ -3,8 +3,7 @@ Imports TableOfUn.Game
 Imports Terminal.Gui
 
 Module AttackDialog
-    Private Sub HandleAttack(defender As Character)
-        Dim attacker As New PlayerCharacter()
+    Sub HandleAttack(attacker As Character, defender As Character)
         Dim stringBuilder As New StringBuilder()
         Select Case attacker.Attack(defender, stringBuilder)
             Case AttackResult.Miss
@@ -27,6 +26,10 @@ Module AttackDialog
             defender.Destroy()
         End If
     End Sub
+    Private Sub ResolveAttack(defender As Character)
+        Dim attacker As New PlayerCharacter()
+        HandleAttack(attacker, defender)
+    End Sub
     Function Run() As Boolean
         Dim cancelButton As New Button("Never mind")
         AddHandler cancelButton.Clicked, AddressOf Application.RequestStop
@@ -40,7 +43,7 @@ Module AttackDialog
         Dim character = New PlayerCharacter()
         attackableCharacters.SetSource(character.Attackables)
         AddHandler attackableCharacters.OpenSelectedItem, Sub(args)
-                                                              HandleAttack(CType(args.Value, Character))
+                                                              ResolveAttack(CType(args.Value, Character))
                                                               If Not character.CanAttack OrElse character.IsDead Then
                                                                   Application.RequestStop()
                                                               Else
