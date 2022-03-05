@@ -65,29 +65,32 @@ Module MapScreen
         Game.MoveNonplayers()
         UpdateScreen()
     End Sub
-    Private Sub HandleKey(args As View.KeyEventEventArgs)
-        Select Case args.KeyEvent.Key
-            Case Key.Enter
-                args.Handled = True
-            Case Key.Esc
-                If GameMenu.Run() Then
-                    Application.RequestStop()
-                End If
-                args.Handled = True
-            Case Key.CursorUp
-                Move(Direction.North)
-                args.Handled = True
-            Case Key.CursorDown
-                Move(Direction.South)
-                args.Handled = True
-            Case Key.CursorRight
-                Move(Direction.East)
-                args.Handled = True
-            Case Key.CursorLeft
-                Move(Direction.West)
-                args.Handled = True
-        End Select
-    End Sub
+    Private Function HandleKey(view As View) As Action(Of View.KeyEventEventArgs)
+        Return Sub(args)
+                   view.SetNeedsDisplay()
+                   Select Case args.KeyEvent.Key
+                       Case Key.Enter
+                           args.Handled = True
+                       Case Key.Esc
+                           If GameMenu.Run() Then
+                               Application.RequestStop()
+                           End If
+                           args.Handled = True
+                       Case Key.CursorUp
+                           Move(Direction.North)
+                           args.Handled = True
+                       Case Key.CursorDown
+                           Move(Direction.South)
+                           args.Handled = True
+                       Case Key.CursorRight
+                           Move(Direction.East)
+                           args.Handled = True
+                       Case Key.CursorLeft
+                           Move(Direction.West)
+                           args.Handled = True
+                   End Select
+               End Sub
+    End Function
     Private Sub ShowInventory()
         InventoryDialog.Run()
         UpdateScreen()
@@ -120,7 +123,8 @@ Module MapScreen
     End Sub
     Sub Run()
         Dim window As New Window("Map")
-        AddHandler window.KeyPress, AddressOf HandleKey
+        Dim mapView As New MapView(50, 1)
+        AddHandler window.KeyPress, HandleKey(mapView)
         AddHandler groundButton.Clicked, AddressOf ShowGround
         AddHandler inventoryButton.Clicked, AddressOf ShowInventory
         AddHandler craftButton.Clicked, AddressOf Craft
@@ -136,7 +140,8 @@ Module MapScreen
             interactButton,
             attackButton,
             equipmentButton,
-            healthLabel)
+            healthLabel,
+            mapView)
         Application.Run(window)
     End Sub
 End Module
