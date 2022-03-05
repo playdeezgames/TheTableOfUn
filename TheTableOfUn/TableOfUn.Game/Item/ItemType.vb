@@ -10,6 +10,10 @@ Public Enum ItemType
     Spellbook
     Rock
     SharpRock
+    Tusk
+    Hide
+    Meat
+    TicketToProm
 End Enum
 Public Module ItemTypeExtensions
     <Extension()>
@@ -33,6 +37,14 @@ Public Module ItemTypeExtensions
                 Return "rock"
             Case ItemType.SharpRock
                 Return "sharp rock"
+            Case ItemType.Tusk
+                Return "tusk"
+            Case ItemType.Hide
+                Return "hide"
+            Case ItemType.Meat
+                Return "meat"
+            Case ItemType.TicketToProm
+                Return "a ticket to prom"
             Case Else
                 Throw New NotImplementedException()
         End Select
@@ -61,6 +73,19 @@ Public Module ItemTypeExtensions
                 Return New Dictionary(Of Integer, Integer) From {{0, 1}, {1, 3}, {2, 3}, {3, 1}}
             Case Else
                 Return New Dictionary(Of Integer, Integer) From {{0, 1}}
+        End Select
+    End Function
+    <Extension()>
+    Function CanConsume(itemType As ItemType) As Boolean
+        Return itemType = ItemType.Meat
+    End Function
+    <Extension()>
+    Function GetHealthBenefit(itemType As ItemType) As Integer
+        Select Case itemType
+            Case ItemType.Meat
+                Return 1
+            Case Else
+                Return 0
         End Select
     End Function
 End Module

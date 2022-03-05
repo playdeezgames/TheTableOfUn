@@ -7,13 +7,24 @@ Module InventoryDialog
         If item.CanEquip Then
             buttons.Add("Equip it!")
         End If
-        Select Case MessageBox.Query(item.ItemType.GetName(), "What do you want to do?", buttons.ToArray)
-            Case 2
-                Dim character As New PlayerCharacter()
-                item.Equip(character)
-                Return True
+        If item.CanConsume Then
+            buttons.Add("Consume it!")
+        End If
+        Dim choice = MessageBox.Query(item.ItemType.GetName(), "What do you want to do?", buttons.ToArray)
+        Dim character As New PlayerCharacter()
+        Select Case choice
+            Case Is >= 2
+                Select Case buttons(choice)
+                    Case "Equip it!"
+                        item.Equip(character)
+                        Return True
+                    Case "Consume it!"
+                        item.Consume(character)
+                        Return True
+                    Case Else
+                        Return False
+                End Select
             Case 1
-                Dim character As New PlayerCharacter()
                 character.Location.Inventory.Add(item)
                 Return True
             Case Else

@@ -140,6 +140,9 @@ Public Class Character
             Return CharacterData.ReadWounds(Id).Value
         End Get
         Set(value As Integer)
+            If value < 0 Then
+                value = 0
+            End If
             CharacterData.WriteWounds(Id, value)
         End Set
     End Property
@@ -170,7 +173,14 @@ Public Class Character
     End Function
     Sub Destroy()
         'TODO: drop any items?
-        'TODO: remove from location
+        Dim drops = CharacterType.GenerateLootDrops
+        For Each drop In drops
+            Dim count = drop.Value
+            While count > 0
+                Location.Inventory.Add(Game.CreateItem(drop.Key))
+                count -= 1
+            End While
+        Next
         CharacterData.Clear(Id)
     End Sub
     ReadOnly Property MaximumHealth As Integer

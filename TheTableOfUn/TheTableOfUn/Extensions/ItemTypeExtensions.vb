@@ -11,6 +11,10 @@ Module ItemTypeExtensions
     Private ReadOnly spellbookThingie As New Thingie("B", BrightBlueOnBlack)
     Private ReadOnly rockThingie As New Thingie("◦", BrownOnBlack)
     Private ReadOnly sharpRockThingie As New Thingie("▫", BrownOnBlack)
+    Private ReadOnly tuskThingie As New Thingie("ˀ", DarkGrayOnBlack)
+    Private ReadOnly hideThingie As New Thingie("ʜ", BrownOnBlack)
+    Private ReadOnly meatThingie As New Thingie("ᵯ", RedOnBlack)
+    Private ReadOnly ticketThingie As New Thingie("━", BlueOnBlack)
     <Extension()>
     Function ToThingie(itemType As ItemType) As Thingie
         Select Case itemType
@@ -32,6 +36,14 @@ Module ItemTypeExtensions
                 Return rockThingie
             Case ItemType.SharpRock
                 Return sharpRockThingie
+            Case ItemType.Tusk
+                Return tuskThingie
+            Case ItemType.Hide
+                Return hideThingie
+            Case ItemType.Meat
+                Return meatThingie
+            Case ItemType.TicketToProm
+                Return ticketThingie
             Case Else
                 Throw New NotImplementedException()
         End Select

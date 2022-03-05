@@ -126,7 +126,44 @@ Module CharacterTypeExtensions
             {CharacterType.Player, New Dictionary(Of ItemType, Dictionary(Of Integer, Integer))},
             {
                 CharacterType.SaurianSwinoid,
-                New Dictionary(Of ItemType, Dictionary(Of Integer, Integer))
+                New Dictionary(Of ItemType, Dictionary(Of Integer, Integer)) From
+                {
+                    {
+                        ItemType.Tusk,
+                        New Dictionary(Of Integer, Integer) From
+                        {
+                            {0, 1},
+                            {1, 1},
+                            {2, 1},
+                            {3, 1}
+                        }
+                    },
+                    {
+                        ItemType.Hide,
+                        New Dictionary(Of Integer, Integer) From
+                        {
+                            {0, 1},
+                            {1, 1}
+                        }
+                    },
+                    {
+                        ItemType.Meat,
+                        New Dictionary(Of Integer, Integer) From
+                        {
+                            {0, 1},
+                            {1, 1},
+                            {2, 1}
+                        }
+                    },
+                    {
+                        ItemType.TicketToProm,
+                        New Dictionary(Of Integer, Integer) From
+                        {
+                            {0, 19},
+                            {2, 1}
+                        }
+                    }
+                }
             },
             {
                 CharacterType.Gorignak,
@@ -136,6 +173,13 @@ Module CharacterTypeExtensions
     <Extension()>
     Public Function GenerateLootDrops(characterType As CharacterType) As Dictionary(Of ItemType, Integer)
         Dim result As New Dictionary(Of ItemType, Integer)
+        Dim itemGenerators = lootDrops(characterType)
+        For Each itemGenerator In itemGenerators
+            Dim count = RNG.FromGenerator(itemGenerator.Value)
+            If count > 0 Then
+                result.Add(itemGenerator.Key, count)
+            End If
+        Next
         Return result
     End Function
 End Module

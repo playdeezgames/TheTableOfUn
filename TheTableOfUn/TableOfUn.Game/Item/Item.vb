@@ -13,6 +13,15 @@ Public Class Item
     Shared Function FromId(itemId As Long) As Item
         Return New Item(itemId)
     End Function
+    ReadOnly Property CanConsume As Boolean
+        Get
+            Return ItemType.CanConsume
+        End Get
+    End Property
+    Sub Consume(character As Character)
+        character.Wounds -= ItemType.GetHealthBenefit()
+        Destroy()
+    End Sub
     Public Overrides Function ToString() As String
         Dim itemType = ItemData.ReadItemType(Id)
         If itemType.HasValue Then
