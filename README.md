@@ -1,21 +1,12 @@
 # TheTableOfUn
-- loot drops(!)
-	- piglizards
-		- tusks
-		- hide
+- fix the "embark" bug
+- armor
+- intro screen to give some sort of hint?
+- loot drops()
 - critters to fight!
 	- minors (sharp teeth)
 - other stuff to craft!
 	- piglizard tusk necklace
 - more sounds!
-- trousers!
-- food to eat
-	- pig lizard meat
-- the Sons of Warvan
-- intro screen to give some sort of hint? (mebbe)
-- armor
 - shields
-- rudimentary lathe
-- must cook meat?
-	- must make fire
 
