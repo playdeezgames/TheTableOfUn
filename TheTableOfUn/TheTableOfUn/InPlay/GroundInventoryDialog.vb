@@ -18,6 +18,7 @@ Module GroundInventoryDialog
         For Each item In items
             character.Inventory.Add(item)
         Next
+        MessageBox.Query("Success!", "You took all the things!", "Ok")
         Application.RequestStop()
     End Sub
     Sub Run()

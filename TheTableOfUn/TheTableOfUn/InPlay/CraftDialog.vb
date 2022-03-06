@@ -19,6 +19,7 @@ Module CraftDialog
         groundItems.SetSource(inventory.CraftableRecipes)
         AddHandler groundItems.OpenSelectedItem, Sub(args)
                                                      If HandleRecipe(CType(args.Value, Recipe)) Then
+                                                         MessageBox.Query("Success!", "You crafted the thing!", "Ok")
                                                          If Not inventory.CanCraft Then
                                                              Application.RequestStop()
                                                          Else

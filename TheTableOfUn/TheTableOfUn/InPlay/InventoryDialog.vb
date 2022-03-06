@@ -16,9 +16,11 @@ Module InventoryDialog
             Case Is >= 2
                 Select Case buttons(choice)
                     Case "Equip it!"
+                        MessageBox.Query("Success!", $"You equip {item.ItemType.GetName}!", "Ok")
                         item.Equip(character)
                         Return True
                     Case "Consume it!"
+                        MessageBox.Query("Success!", $"You consume {item.ItemType.GetName}!", "Ok")
                         item.Consume(character)
                         Return True
                     Case Else
