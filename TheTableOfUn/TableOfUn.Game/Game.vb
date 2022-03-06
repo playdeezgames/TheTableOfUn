@@ -101,6 +101,9 @@ Public Module Game
                 character.Location = nextLocation
             ElseIf nextLocation.CanBeAttackedBy(character) Then
                 Game.Attack(character, nextLocation.Character)
+                If character.IsDead Then
+                    character.Destroy()
+                End If
             End If
         End If
     End Sub

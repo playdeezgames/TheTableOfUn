@@ -6,7 +6,7 @@ Public Enum CharacterType As Integer
     SaurianSwinoid
     Gorignak
 End Enum
-Module CharacterTypeExtensions
+Public Module CharacterTypeExtensions
     <Extension()>
     Public Function GetName(characterType As CharacterType) As String
         Select Case characterType
@@ -181,5 +181,19 @@ Module CharacterTypeExtensions
             End If
         Next
         Return result
+    End Function
+    <Extension()>
+    Public Function GetHitSfx(characterType As CharacterType) As Sfx
+        If characterType = CharacterType.Player Then
+            Return Sfx.HitEnemy
+        End If
+        Return Sfx.HitPlayer
+    End Function
+    <Extension()>
+    Public Function GetKillSfx(characterType As CharacterType) As Sfx
+        If characterType = CharacterType.Player Then
+            Return Sfx.KillEnemy
+        End If
+        Return Sfx.KillPlayer
     End Function
 End Module

@@ -6,20 +6,27 @@ Module MainMenu
         listItems.Add(New MenuListItem("Quit", AddressOf ConfirmQuit.Run))
         Return listItems
     End Function
-    Private Sub HandleMenuItem(args As ListViewItemEventArgs)
-        Dim listItemAction = CType(args.Value, MenuListItem).DoStuff
-        listItemAction()
-    End Sub
     Sub Run()
-        Dim window As New Window("The Table of Un")
-        Dim listView As New ListView()
-        listView.X = Pos.Center
-        listView.Y = Pos.Center
-        listView.Width = [Dim].Percent(50)
-        listView.Height = [Dim].Percent(50)
-        listView.SetSource(GetMainMenuListItems())
-        AddHandler listView.OpenSelectedItem, AddressOf HandleMenuItem
-        window.Add(listView)
-        Application.Run(window)
+        Do
+            Dim window As New Window("The Table of Un")
+            Dim listView As New ListView()
+            listView.X = Pos.Center
+            listView.Y = Pos.Center
+            listView.Width = [Dim].Percent(50)
+            listView.Height = [Dim].Percent(50)
+            listView.SetSource(GetMainMenuListItems())
+            Dim doStuff As Func(Of Boolean) = Nothing
+            AddHandler listView.OpenSelectedItem, Sub(args As ListViewItemEventArgs)
+                                                      doStuff = CType(args.Value, MenuListItem).DoStuff
+                                                      Application.RequestStop()
+                                                  End Sub
+            window.Add(listView)
+            Application.Run(window)
+            If doStuff IsNot Nothing Then
+                If doStuff() Then
+                    Exit Do
+                End If
+            End If
+        Loop
     End Sub
 End Module

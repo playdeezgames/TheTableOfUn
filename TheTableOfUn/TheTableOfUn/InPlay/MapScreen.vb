@@ -35,8 +35,6 @@ Module MapScreen
         Return Sub(args)
                    view.SetNeedsDisplay()
                    Select Case args.KeyEvent.Key
-                       Case Key.Enter
-                           args.Handled = True
                        Case Key.Esc
                            If GameMenu.Run() Then
                                Application.RequestStop()

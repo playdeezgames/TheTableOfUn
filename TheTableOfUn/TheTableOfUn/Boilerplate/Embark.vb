@@ -1,9 +1,10 @@
 ﻿Imports TableOfUn.Game
 Imports Terminal.Gui
 Module Embark
-    Sub Run()
+    Function Run() As Boolean
         Game.Start()
         MapScreen.Run()
         Game.Finish()
-    End Sub
+        Return False
+    End Function
 End Module

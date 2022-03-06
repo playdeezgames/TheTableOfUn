@@ -1,9 +1,10 @@
 ﻿Imports Terminal.Gui
 
 Module ConfirmQuit
-    Sub Run()
+    Function Run() As Boolean
         If MessageBox.Query("Are you sure?", "Are you sure you want to quit?", "No", "Yes") = 1 Then
-            Application.RequestStop()
+            Return True
         End If
-    End Sub
+        Return False
+    End Function
 End Module

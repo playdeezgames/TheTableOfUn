@@ -9,16 +9,16 @@ Module AttackDialog
             Case AttackResult.Miss
                 Game.Play(Sfx.MissEnemy)
             Case AttackResult.Hit
-                Game.Play(Sfx.HitEnemy)
+                Game.Play(GetHitSfx(attacker.CharacterType))
             Case AttackResult.Kill
-                Game.Play(Sfx.KillEnemy)
+                Game.Play(GetKillSfx(attacker.CharacterType))
         End Select
         If Not defender.IsDead Then
             Select Case defender.Attack(attacker, stringBuilder)
                 Case AttackResult.Kill
-                    Game.Play(Sfx.KillPlayer)
+                    Game.Play(GetKillSfx(defender.CharacterType))
                 Case AttackResult.Hit
-                    Game.Play(Sfx.HitPlayer)
+                    Game.Play(GetHitSfx(defender.CharacterType))
             End Select
         End If
         MessageBox.ErrorQuery("HUZZAH!", stringBuilder.ToString(), "Ok")
