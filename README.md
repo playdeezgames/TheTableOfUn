@@ -1,6 +1,6 @@
 # TheTableOfUn
+- on ground, a "take all" button?
 - armor
-- intro screen to give some sort of hint?
 - loot drops()
 - critters to fight!
 	- minors (sharp teeth)

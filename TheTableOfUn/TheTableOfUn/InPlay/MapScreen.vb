@@ -5,7 +5,7 @@ Module MapScreen
     Private ReadOnly groundButton As New Button(1, 16, " Ground  ")
     Private ReadOnly inventoryButton As New Button(15, 16, "Inventory")
     Private ReadOnly craftButton As New Button(29, 16, "  Craft  ")
-    Private ReadOnly interactButton As New Button(1, 17, "Interact ")
+    Private ReadOnly interactButton As New Button(1, 17, "I_nteract ")
     Private ReadOnly attackButton As New Button(15, 17, " Attack  ")
     Private ReadOnly equipmentButton As New Button(29, 17, "Equipment")
     Private ReadOnly healthLabel As New Label(33, 1, "Health: X/X")
