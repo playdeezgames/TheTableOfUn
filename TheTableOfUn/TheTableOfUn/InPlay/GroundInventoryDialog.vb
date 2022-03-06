@@ -12,10 +12,20 @@ Module GroundInventoryDialog
                 Return False
         End Select
     End Function
+    Private Sub TakeAll()
+        Dim character As New PlayerCharacter
+        Dim items = character.Location.Inventory.Items
+        For Each item In items
+            character.Inventory.Add(item)
+        Next
+        Application.RequestStop()
+    End Sub
     Sub Run()
         Dim cancelButton As New Button("Never mind")
         AddHandler cancelButton.Clicked, AddressOf Application.RequestStop
-        Dim dlg As New Dialog("Items on the Ground:", cancelButton)
+        Dim takeAllButton As New Button("Take All!")
+        AddHandler takeAllButton.Clicked, AddressOf TakeAll
+        Dim dlg As New Dialog("Items on the Ground:", cancelButton, takeAllButton)
         Dim groundItems As New ListView()
         groundItems.X = Pos.Center
         groundItems.Y = Pos.Center
