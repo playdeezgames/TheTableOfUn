@@ -19,9 +19,9 @@ Module GameMenu
                                                   Application.RequestStop()
                                               End If
                                           End Sub
-        Dim saveButton As New Button("Save Game...")
-        AddHandler saveButton.Clicked, AddressOf HandleSave
-        Dim dlg As New Dialog("Game Menu", cancelButton, abandonButton, saveButton)
+        'Dim saveButton As New Button("Save Game...")
+        'AddHandler saveButton.Clicked, AddressOf HandleSave
+        Dim dlg As New Dialog("Game Menu", cancelButton, abandonButton) ', saveButton)
         Application.Run(dlg)
         Return result
     End Function

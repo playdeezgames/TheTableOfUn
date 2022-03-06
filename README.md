@@ -1,5 +1,4 @@
 # TheTableOfUn
-- fix the "embark" bug
 - armor
 - intro screen to give some sort of hint?
 - loot drops()
