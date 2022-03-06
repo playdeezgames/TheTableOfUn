@@ -93,6 +93,7 @@ Public Module Game
         'mission accomplished!
     End Sub
     Private ReadOnly swinoidMoveGenerator As New Dictionary(Of Boolean, Integer) From {{True, 1}, {False, 1}}
+    Private ReadOnly gorignakMoveGenerator As New Dictionary(Of Boolean, Integer) From {{True, 1}}
     Private Sub SaurianSwinoidTurn(character As Character)
         If RNG.FromGenerator(swinoidMoveGenerator) Then
             Dim direction = PickDirection()
@@ -111,9 +112,23 @@ Public Module Game
         'make gorignak more aggressive
         'make gorignak smash through walls
         'stretch: make gorignak pickup and throw rocks
-        If RNG.FromGenerator(swinoidMoveGenerator) Then
-            Dim direction = PickDirection()
+        If RNG.FromGenerator(gorignakMoveGenerator) Then
+            Dim direction As Direction
+            Dim player As New PlayerCharacter
+            If player.Location.X < character.Location.X Then
+                direction = Direction.West
+            ElseIf player.Location.X > character.Location.X Then
+                direction = Direction.East
+            ElseIf player.Location.Y < character.Location.Y Then
+                direction = Direction.North
+            ElseIf player.Location.Y > character.Location.Y Then
+                direction = Direction.South
+            End If
             Dim nextLocation = character.Location.GetNeighbor(direction)
+            If Not nextLocation.CanBeEnteredBy(character) Then
+                direction = PickDirection()
+                nextLocation = character.Location.GetNeighbor(direction)
+            End If
             If nextLocation.CanBeEnteredBy(character) Then
                 character.Location = nextLocation
             ElseIf nextLocation.CanBeAttackedBy(character) Then
