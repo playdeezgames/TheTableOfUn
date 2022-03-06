@@ -2,6 +2,9 @@
 
 Public Enum EquipSlot
     Weapon
+    Shield
+    Legs
+    Neck
 End Enum
 Public Module EquipSlotExtensions
     <Extension()>
@@ -9,6 +12,12 @@ Public Module EquipSlotExtensions
         Select Case slot
             Case EquipSlot.Weapon
                 Return "Weapon"
+            Case EquipSlot.Shield
+                Return "Shield"
+            Case EquipSlot.Legs
+                Return "Legs"
+            Case EquipSlot.Neck
+                Return "Neck"
             Case Else
                 Throw New NotImplementedException()
         End Select

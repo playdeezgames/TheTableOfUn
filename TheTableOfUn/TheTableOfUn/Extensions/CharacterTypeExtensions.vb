@@ -3,7 +3,7 @@ Imports System.Runtime.CompilerServices
 Imports TableOfUn.Game
 
 Module CharacterTypeExtensions
-    'ȸʃʘɷ Ѧ҈҉ ᴥϠ₷
+    'ȸʃʘɷ Ѧ҈҉  ᴥϠ₷
     Private ReadOnly noneThingie As New Thingie(".", GrayOnBlack)
     Private ReadOnly playerThingie As New Thingie("@", WhiteOnBlack)
     Private ReadOnly swinoidThingie As New Thingie("ȸ", BrightRedOnBlack)

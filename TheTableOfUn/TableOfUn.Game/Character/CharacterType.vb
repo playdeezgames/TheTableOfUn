@@ -92,7 +92,7 @@ Public Module CharacterTypeExtensions
         }
     <Extension()>
     Public Function GetDefendGenerator(characterType As CharacterType) As Dictionary(Of Integer, Integer)
-        Return attackGenerators(characterType)
+        Return defendGenerators(characterType)
     End Function
     <Extension()>
     Public Function GetBodyPoints(characterType As CharacterType) As Integer
@@ -148,6 +148,15 @@ Public Module CharacterTypeExtensions
                     },
                     {
                         ItemType.Meat,
+                        New Dictionary(Of Integer, Integer) From
+                        {
+                            {0, 1},
+                            {1, 1},
+                            {2, 1}
+                        }
+                    },
+                    {
+                        ItemType.Bone,
                         New Dictionary(Of Integer, Integer) From
                         {
                             {0, 1},

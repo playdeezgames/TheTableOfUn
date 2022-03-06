@@ -1,5 +1,6 @@
 # TheTableOfUn
 - on ground, a "take all" button?
+- feedback for crafting an item
 - armor
 - loot drops()
 - critters to fight!

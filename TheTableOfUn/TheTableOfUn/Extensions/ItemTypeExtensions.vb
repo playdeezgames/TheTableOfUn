@@ -15,9 +15,27 @@ Module ItemTypeExtensions
     Private ReadOnly hideThingie As New Thingie("ʜ", BrownOnBlack)
     Private ReadOnly meatThingie As New Thingie("ᵯ", RedOnBlack)
     Private ReadOnly ticketThingie As New Thingie("━", BlueOnBlack)
+    Private ReadOnly boneThingie As New Thingie("-", DarkGrayOnBlack)
+    Private ReadOnly needleThingie As New Thingie("'", DarkGrayOnBlack)
+    Private ReadOnly trousersThingie As New Thingie("ɷ", BrownOnBlack)
+    Private ReadOnly leatherCordThingie As New Thingie("ʃ", BrownOnBlack)
+    Private ReadOnly shieldThingie As New Thingie("ʘ", BrownOnBlack)
+    Private ReadOnly necklaceThingie As New Thingie("◌", BrownOnBlack)
     <Extension()>
     Function ToThingie(itemType As ItemType) As Thingie
         Select Case itemType
+            Case ItemType.Necklace
+                Return necklaceThingie
+            Case ItemType.Bone
+                Return boneThingie
+            Case ItemType.Needle
+                Return needleThingie
+            Case ItemType.Trousers
+                Return trousersThingie
+            Case ItemType.LeatherCord
+                Return leatherCordThingie
+            Case ItemType.Shield
+                Return shieldThingie
             Case ItemType.None
                 Return noneThingie
             Case ItemType.Candle
