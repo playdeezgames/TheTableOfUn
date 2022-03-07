@@ -2,8 +2,9 @@
 Imports Terminal.Gui
 
 Module InventoryDialog
-    Private Function HandleItem(item As Item) As Boolean
+    Private Function HandleStack(itemStack As StackedItem) As Boolean
         Dim buttons As New List(Of NStack.ustring) From {"Keep it!", "Drop it!"}
+        Dim item = itemStack.Items.First
         If item.CanEquip Then
             buttons.Add("Equip it!")
         End If
@@ -42,14 +43,14 @@ Module InventoryDialog
         groundItems.Y = Pos.Center
         groundItems.Width = [Dim].Fill
         groundItems.Height = [Dim].Fill - 2
-        Dim inventory = New PlayerCharacter().Inventory
-        groundItems.SetSource(inventory.Items)
+        Dim inventory = New PlayerCharacter().StackedInventory
+        groundItems.SetSource(inventory.Stacks)
         AddHandler groundItems.OpenSelectedItem, Sub(args)
-                                                     If HandleItem(CType(args.Value, Item)) Then
+                                                     If HandleStack(CType(args.Value, StackedItem)) Then
                                                          If inventory.IsEmpty Then
                                                              Application.RequestStop()
                                                          Else
-                                                             groundItems.SetSource(inventory.Items)
+                                                             groundItems.SetSource(inventory.Stacks)
                                                          End If
                                                      End If
                                                  End Sub
