@@ -56,4 +56,7 @@ Public Class Item
     Public Function GetAttackGenerator() As Dictionary(Of Integer, Integer)
         Return ItemType.GetAttackGenerator()
     End Function
+    Public Function GetDefendGenerator() As Dictionary(Of Integer, Integer)
+        Return ItemType.GetDefendGenerator()
+    End Function
 End Class

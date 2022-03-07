@@ -100,6 +100,17 @@ Public Module ItemTypeExtensions
         End Select
     End Function
     <Extension()>
+    Function GetDefendGenerator(itemType As ItemType) As Dictionary(Of Integer, Integer)
+        Select Case itemType
+            Case ItemType.Shield
+                Return New Dictionary(Of Integer, Integer) From {{0, 2}, {1, 1}}
+            Case ItemType.Trousers
+                Return New Dictionary(Of Integer, Integer) From {{0, 4}, {1, 4}, {2, 1}}
+            Case Else
+                Return New Dictionary(Of Integer, Integer) From {{0, 1}}
+        End Select
+    End Function
+    <Extension()>
     Function CanConsume(itemType As ItemType) As Boolean
         Return itemType = ItemType.Meat
     End Function

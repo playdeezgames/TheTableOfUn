@@ -119,12 +119,17 @@ Public Class Character
         Return initial
     End Function
     Function RollAttack() As Integer
-        'TODO: if weapon equipped, use those stats instead
         Return RNG.FromGenerator(GetAttackGenerator)
     End Function
+    Private Function GetDefendGenerator() As Dictionary(Of Integer, Integer)
+        Dim initial As New Dictionary(Of Integer, Integer)(CharacterType.GetDefendGenerator())
+        For Each equippedItem In Equipment
+            initial = initial.CombineGenerator(equippedItem.Value.GetDefendGenerator())
+        Next
+        Return initial
+    End Function
     Function RollDefend() As Integer
-        'TODO: if armor equipped, use those stats instead
-        Return RNG.FromGenerator(CharacterType.GetDefendGenerator())
+        Return RNG.FromGenerator(GetDefendGenerator)
     End Function
     Private Shared Function DetermineDamage(attackRoll As Integer, defendRoll As Integer) As Integer
         If attackRoll > defendRoll Then

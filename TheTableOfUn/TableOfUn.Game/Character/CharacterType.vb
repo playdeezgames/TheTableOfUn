@@ -102,7 +102,7 @@ Public Module CharacterTypeExtensions
             Case CharacterType.Player
                 Return 5
             Case CharacterType.SaurianSwinoid
-                Return 1
+                Return 3
             Case CharacterType.Gorignak
                 Return 10
             Case Else
